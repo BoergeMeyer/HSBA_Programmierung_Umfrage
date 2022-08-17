@@ -34,10 +34,19 @@ public class Question {
     @Basic(optional = false)
     private String title;
 
+    @Setter
+    @Getter
     @OrderBy
     @JoinColumn
     @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(targetEntity = Answer.class)
     private List<Answer> answers;
+
+    public Question(Survey survey, String question){
+        this.survey = survey;
+        this.title = question;
+    }
+
+
 }
 

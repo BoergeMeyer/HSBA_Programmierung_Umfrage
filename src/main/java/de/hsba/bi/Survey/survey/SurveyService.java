@@ -5,7 +5,9 @@ import org.springframework.security.task.DelegatingSecurityContextAsyncTaskExecu
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -20,7 +22,7 @@ public class SurveyService {
         return surveyRepository.findAll();
     }
 
-    public Survey save(Survey survey){
+    public Survey saveSurvey(Survey survey){
         return surveyRepository.save(survey);
     }
 
@@ -31,4 +33,43 @@ public class SurveyService {
     public void deleteSurvey(Long id){
         surveyRepository.deleteById(id);
     }
+
+    //methods for question
+    public List<Question> findAllQuestions(){
+        return questionRepository.findAll();
+    }
+
+    public Question saveQuestion(Question question){
+        return questionRepository.save(question);
+    }
+
+    public Question getQuestion(Long id){
+        return questionRepository.findById(id).orElse(null);
+    }
+
+    public void deleteQuestion(Long id){
+        questionRepository.deleteById(id);
+    }
+
+    public Question getQuestionForSurvey(Long surveyId){
+        getQuestion(surveyId).getId();
+        List<Question> questionList = new ArrayList<Question>();
+        for(Question question : questionList){
+            return question;
+        }
+        return null;
+    }
+
+    public List<Long> XYZ(){
+        List<Question> questionList = new ArrayList<Question>();
+        List<Long> idList = questionList.stream()
+                .map(Question::getId)
+                .collect(Collectors.toList());
+        return idList;
+
+    }
+    //https://stackoverflow.com/questions/18852059/java-list-containsobject-with-field-value-equal-to-x
+
+
+
 }
