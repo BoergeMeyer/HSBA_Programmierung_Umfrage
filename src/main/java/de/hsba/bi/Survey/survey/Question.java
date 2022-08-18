@@ -31,6 +31,8 @@ public class Question {
     @ManyToOne(optional = false, targetEntity = Survey.class)
     private Survey survey;
 
+    @Setter
+    @Getter
     @Basic(optional = false)
     private String title;
 
@@ -47,6 +49,7 @@ public class Question {
         this.title = question;
     }
 
-
 }
+
+
 

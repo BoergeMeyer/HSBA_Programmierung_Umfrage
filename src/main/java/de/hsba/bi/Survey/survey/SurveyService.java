@@ -34,12 +34,15 @@ public class SurveyService {
         surveyRepository.deleteById(id);
     }
 
+
     //methods for question
+
     public List<Question> findAllQuestions(){
         return questionRepository.findAll();
     }
 
-    public Question saveQuestion(Question question){
+
+    public Question save(Question question){
         return questionRepository.save(question);
     }
 
@@ -51,25 +54,6 @@ public class SurveyService {
         questionRepository.deleteById(id);
     }
 
-    public Question getQuestionForSurvey(Long surveyId){
-        getQuestion(surveyId).getId();
-        List<Question> questionList = new ArrayList<Question>();
-        for(Question question : questionList){
-            return question;
-        }
-        return null;
-    }
-
-    public List<Long> XYZ(){
-        List<Question> questionList = new ArrayList<Question>();
-        List<Long> idList = questionList.stream()
-                .map(Question::getId)
-                .collect(Collectors.toList());
-        return idList;
-
-    }
     //https://stackoverflow.com/questions/18852059/java-list-containsobject-with-field-value-equal-to-x
-
-
 
 }
