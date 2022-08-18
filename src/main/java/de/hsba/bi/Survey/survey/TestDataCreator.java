@@ -40,9 +40,6 @@ public class TestDataCreator {
         Question q1 = new Question(survey1,"Testfrage Nr.1");
         Question q2 = new Question(survey1,"Testfrage Nr.2");
 
-        surveyService.saveQuestion(q1);
-        surveyService.saveQuestion(q2);
-
         //Umfrage Nr.2
         Survey survey2 = new Survey(erik);
         survey2.setTitle("Umfrage Nr.2");
