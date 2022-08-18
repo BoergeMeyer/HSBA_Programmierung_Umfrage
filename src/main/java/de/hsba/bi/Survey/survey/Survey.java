@@ -53,8 +53,25 @@ public class Survey {
         return this.creator != null && this.creator.getName().equals(User.getCurrentUsername());
     }
 
-    public Long getID(){
-        return this.id;
+    public void addQuestion(Question question){
+        if(questions == null){
+            questions = new ArrayList<>();
+            questions.add(question);
+        }else{
+            questions.add(question);
+        }
+    }
+
+    public List<String> returnQuestionTitle() {
+        List<String> titles = new ArrayList<>();
+        if(getQuestions() == null){
+            return null;
+        }else{
+            for (Question question : getQuestions()) {
+                titles.add(question.getTitle());
+            }
+        }
+        return titles;
     }
 }
 
