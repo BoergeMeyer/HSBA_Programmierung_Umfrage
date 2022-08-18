@@ -52,5 +52,9 @@ public class Survey {
     public boolean isOwnedByCurrentUser() {
         return this.creator != null && this.creator.getName().equals(User.getCurrentUsername());
     }
+
+    public Long getID(){
+        return this.id;
+    }
 }
 

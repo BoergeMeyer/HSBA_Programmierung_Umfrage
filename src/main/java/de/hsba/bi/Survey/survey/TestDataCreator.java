@@ -35,17 +35,23 @@ public class TestDataCreator {
         //Umfrage Nr.1
         Survey survey1 = new Survey(börge);
         survey1.setTitle("Umfrage Nr.1");
-        surveyService.save(survey1);
+        surveyService.saveSurvey(survey1);
+
+        Question q1 = new Question(survey1,"Testfrage Nr.1");
+        Question q2 = new Question(survey1,"Testfrage Nr.2");
+
+        surveyService.saveQuestion(q1);
+        surveyService.saveQuestion(q2);
 
         //Umfrage Nr.2
         Survey survey2 = new Survey(erik);
         survey2.setTitle("Umfrage Nr.2");
-        surveyService.save(survey2);
+        surveyService.saveSurvey(survey2);
 
         //Umfrage Nr.3
         Survey survey3 = new Survey(bennett);
         survey3.setTitle("Umfrage Nr.3");
-        surveyService.save(survey3);
+        surveyService.saveSurvey(survey3);
     }
 
     private User createUser(String name, String password) {

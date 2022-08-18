@@ -35,5 +35,10 @@ public class Answer {
     @Getter
     @Basic
     private String title;
+
+    public Answer(Question question, String answer){
+        this.question = question;
+        this.title = answer;
+    }
 }
 

@@ -5,7 +5,9 @@ import org.springframework.security.task.DelegatingSecurityContextAsyncTaskExecu
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -20,7 +22,7 @@ public class SurveyService {
         return surveyRepository.findAll();
     }
 
-    public Survey save(Survey survey){
+    public Survey saveSurvey(Survey survey){
         return surveyRepository.save(survey);
     }
 
@@ -32,10 +34,13 @@ public class SurveyService {
         surveyRepository.deleteById(id);
     }
 
-    //methods for questions
+
+    //methods for question
+
     public List<Question> findAllQuestions(){
         return questionRepository.findAll();
     }
+
 
     public Question save(Question question){
         return questionRepository.save(question);
@@ -49,5 +54,6 @@ public class SurveyService {
         questionRepository.deleteById(id);
     }
 
+    //https://stackoverflow.com/questions/18852059/java-list-containsobject-with-field-value-equal-to-x
 
 }
