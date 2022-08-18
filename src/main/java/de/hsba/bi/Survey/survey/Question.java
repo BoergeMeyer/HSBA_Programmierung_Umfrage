@@ -31,6 +31,8 @@ public class Question {
     @ManyToOne(optional = false, targetEntity = Survey.class)
     private Survey survey;
 
+    @Setter
+    @Getter
     @Basic(optional = false)
     private String title;
 
@@ -39,5 +41,12 @@ public class Question {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(targetEntity = Answer.class)
     private List<Answer> answers;
+
+    public Question(Survey survey, String title){
+        this.survey = survey;
+        this.title = title;
+    }
 }
+
+
 
