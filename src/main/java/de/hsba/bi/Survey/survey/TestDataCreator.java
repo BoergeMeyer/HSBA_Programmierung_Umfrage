@@ -48,6 +48,16 @@ public class TestDataCreator {
         surveyService.getSurvey(survey1.getId()).addQuestion(q2);
         System.out.println(survey1.getId());
 
+        Answer a1 = new Answer(q1,"Testantwort Nr.1 zu Frage Nr.1");
+        Answer a2 = new Answer(q1,"Testantwort Nr.2 zu Frage Nr.1");
+        Answer a3 = new Answer(q2,"Testantwort Nr.3 zu Frage Nr.2");
+        Answer a4 = new Answer(q2,"Testantwort Nr.4 zu Frage Nr.2");
+        surveyService.saveAnswer(a1);
+        surveyService.saveAnswer(a2);
+        surveyService.saveAnswer(a3);
+        surveyService.saveAnswer(a4);
+
+
         /*
         JUST IDEAS:
         surveyService.getSurvey(survey1.getId()).getQuestions().get(1).getTitle();
@@ -67,6 +77,15 @@ public class TestDataCreator {
         surveyService.getSurvey(survey2.getId()).addQuestion(q4);
         System.out.println(survey2.getId());
 
+        Answer a5 = new Answer(q3,"Weitere Frage 1");
+        Answer a6 = new Answer(q3,"Weitere Frage 2");
+        Answer a7 = new Answer(q4,"Weitere Frage 3");
+        Answer a8 = new Answer(q4,"Weitere Frage 4");
+        surveyService.saveAnswer(a5);
+        surveyService.saveAnswer(a6);
+        surveyService.saveAnswer(a7);
+        surveyService.saveAnswer(a8);
+
         //Umfrage Nr.3
         Survey survey3 = new Survey(bennett);
         survey3.setTitle("Umfrage Nr.3");
@@ -80,12 +99,30 @@ public class TestDataCreator {
         surveyService.getSurvey(survey3.getId()).addQuestion(q6);
         System.out.println(survey3.getId());
 
+        Answer a9 = new Answer(q3,"Weitere Frage 5");
+        Answer a10 = new Answer(q3,"Weitere Frage 6");
+        Answer a11 = new Answer(q4,"Weitere Frage 7");
+        Answer a12 = new Answer(q4,"Weitere Frage 8");
+        surveyService.saveAnswer(a9);
+        surveyService.saveAnswer(a10);
+        surveyService.saveAnswer(a11);
+        surveyService.saveAnswer(a12);
+
+        //print all
         surveyService.findAllSurvey().forEach(
                 survey -> {
                     System.out.println(survey.getTitle());
                     survey.getQuestions().forEach(question -> System.out.println(question.getTitle()));
+                    survey.getQuestions().forEach(question ->
+                        System.out.println(question.getTitle())
+                    );
                 }
         );
+
+        //test
+        //surveyService.findAllSurvey().get(4).getQuestions().get(5).getAnswers().get(5);
+
+
     }
 
 
