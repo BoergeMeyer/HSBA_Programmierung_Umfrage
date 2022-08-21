@@ -53,5 +53,15 @@ public class Survey {
         return this.creator != null && this.creator.getName().equals(User.getCurrentUsername());
     }
 
+    public void addQuestion(Question question){
+        if(questions == null){
+            questions = new ArrayList<>();
+            questions.add(question);
+        }else{
+            questions.add(question);
+        }
+    }
+
+
 }
 

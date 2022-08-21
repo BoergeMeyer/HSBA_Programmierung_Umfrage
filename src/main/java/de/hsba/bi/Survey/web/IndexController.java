@@ -17,6 +17,8 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("surveyAll",surveyService.findAllSurvey());
+        model.addAttribute("allAnswers", surveyService.findAllAnswers());
+        model.addAttribute("allQuestions", surveyService.findAllQuestions());
         return "index";
     }
 }

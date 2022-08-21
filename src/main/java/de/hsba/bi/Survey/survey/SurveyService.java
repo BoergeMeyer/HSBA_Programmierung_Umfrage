@@ -41,8 +41,7 @@ public class SurveyService {
         return questionRepository.findAll();
     }
 
-
-    public Question save(Question question){
+    public Question saveQuestion(Question question){
         return questionRepository.save(question);
     }
 
@@ -55,5 +54,23 @@ public class SurveyService {
     }
 
     //https://stackoverflow.com/questions/18852059/java-list-containsobject-with-field-value-equal-to-x
+    //https://www.geeksforgeeks.org/arraylist-foreach-method-in-java/
 
+    //methods for answer
+
+    public List<Answer> findAllAnswers(){
+        return answerRepository.findAll();
+    }
+
+    public Answer saveAnswer(Answer answer){
+        return answerRepository.save(answer);
+    }
+
+    public Answer getAnswer(Long id){
+        return answerRepository.findById(id).orElse(null);
+    }
+
+    public void deleteAnswer(Long id){
+        answerRepository.deleteById(id);
+    }
 }
