@@ -47,7 +47,6 @@ public class TestDataCreator {
         surveyService.saveQuestion(q2);
         surveyService.getSurvey(survey1.getId()).addQuestion(q1);
         surveyService.getSurvey(survey1.getId()).addQuestion(q2);
-        System.out.println(survey1.getId());
 
         Answer a1 = new Answer(q1,"Antwort 1");
         Answer a2 = new Answer(q1,"Antwort 2");
@@ -74,7 +73,6 @@ public class TestDataCreator {
         surveyService.saveQuestion(q4);
         surveyService.getSurvey(survey2.getId()).addQuestion(q3);
         surveyService.getSurvey(survey2.getId()).addQuestion(q4);
-        System.out.println(survey2.getId());
 
         Answer a5 = new Answer(q3,"Antwort 5");
         Answer a6 = new Answer(q3,"Antwort 6");
@@ -101,7 +99,6 @@ public class TestDataCreator {
         surveyService.saveQuestion(q6);
         surveyService.getSurvey(survey3.getId()).addQuestion(q5);
         surveyService.getSurvey(survey3.getId()).addQuestion(q6);
-        System.out.println(survey3.getId());
 
         Answer a9 = new Answer(q3,"Antwort 9");
         Answer a10 = new Answer(q3,"Antwort 10");
