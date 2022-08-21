@@ -62,16 +62,6 @@ public class Survey {
         }
     }
 
-    public List<String> returnQuestionTitle() {
-        List<String> titles = new ArrayList<>();
-        if(getQuestions() == null){
-            return null;
-        }else{
-            for (Question question : getQuestions()) {
-                titles.add(question.getTitle());
-            }
-        }
-        return titles;
-    }
+
 }
 
