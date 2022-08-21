@@ -38,6 +38,7 @@ public class TestDataCreator {
         //Umfrage Nr.1
         Survey survey1 = new Survey(börge);
         survey1.setTitle("Umfrage Nr.1");
+        survey1.setDescription("Optionale Testbeschreibung");
         surveyService.saveSurvey(survey1);
 
         Question q1 = new Question(survey1,"Testfrage Nr.1");
@@ -48,21 +49,19 @@ public class TestDataCreator {
         surveyService.getSurvey(survey1.getId()).addQuestion(q2);
         System.out.println(survey1.getId());
 
-        Answer a1 = new Answer(q1,"Testantwort Nr.1 zu Frage Nr.1");
-        Answer a2 = new Answer(q1,"Testantwort Nr.2 zu Frage Nr.1");
-        Answer a3 = new Answer(q2,"Testantwort Nr.3 zu Frage Nr.2");
-        Answer a4 = new Answer(q2,"Testantwort Nr.4 zu Frage Nr.2");
+        Answer a1 = new Answer(q1,"Antwort 1");
+        Answer a2 = new Answer(q1,"Antwort 2");
+        Answer a3 = new Answer(q2,"Antwort 3");
+        Answer a4 = new Answer(q2,"Antwort 4");
         surveyService.saveAnswer(a1);
         surveyService.saveAnswer(a2);
         surveyService.saveAnswer(a3);
         surveyService.saveAnswer(a4);
+        surveyService.getQuestion(q1.getId()).addAnswer(a1);
+        surveyService.getQuestion(q1.getId()).addAnswer(a2);
+        surveyService.getQuestion(q2.getId()).addAnswer(a3);
+        surveyService.getQuestion(q2.getId()).addAnswer(a4);
 
-
-        /*
-        JUST IDEAS:
-        surveyService.getSurvey(survey1.getId()).getQuestions().get(1).getTitle();
-        surveyService.getSurvey(survey1.getId()).getQuestions().forEach(question -> question.getTitle());
-        */
 
         //Umfrage Nr.2
         Survey survey2 = new Survey(erik);
@@ -77,14 +76,19 @@ public class TestDataCreator {
         surveyService.getSurvey(survey2.getId()).addQuestion(q4);
         System.out.println(survey2.getId());
 
-        Answer a5 = new Answer(q3,"Weitere Frage 1");
-        Answer a6 = new Answer(q3,"Weitere Frage 2");
-        Answer a7 = new Answer(q4,"Weitere Frage 3");
-        Answer a8 = new Answer(q4,"Weitere Frage 4");
+        Answer a5 = new Answer(q3,"Antwort 5");
+        Answer a6 = new Answer(q3,"Antwort 6");
+        Answer a7 = new Answer(q4,"Antwort 7");
+        Answer a8 = new Answer(q4,"Antwort 8");
         surveyService.saveAnswer(a5);
         surveyService.saveAnswer(a6);
         surveyService.saveAnswer(a7);
         surveyService.saveAnswer(a8);
+        surveyService.getQuestion(q3.getId()).addAnswer(a5);
+        surveyService.getQuestion(q3.getId()).addAnswer(a6);
+        surveyService.getQuestion(q4.getId()).addAnswer(a7);
+        surveyService.getQuestion(q4.getId()).addAnswer(a8);
+
 
         //Umfrage Nr.3
         Survey survey3 = new Survey(bennett);
@@ -99,30 +103,18 @@ public class TestDataCreator {
         surveyService.getSurvey(survey3.getId()).addQuestion(q6);
         System.out.println(survey3.getId());
 
-        Answer a9 = new Answer(q3,"Weitere Frage 5");
-        Answer a10 = new Answer(q3,"Weitere Frage 6");
-        Answer a11 = new Answer(q4,"Weitere Frage 7");
-        Answer a12 = new Answer(q4,"Weitere Frage 8");
+        Answer a9 = new Answer(q3,"Antwort 9");
+        Answer a10 = new Answer(q3,"Antwort 10");
+        Answer a11 = new Answer(q4,"Antwort 11");
+        Answer a12 = new Answer(q4,"Antwort 12");
         surveyService.saveAnswer(a9);
         surveyService.saveAnswer(a10);
         surveyService.saveAnswer(a11);
         surveyService.saveAnswer(a12);
-
-        //print all
-        surveyService.findAllSurvey().forEach(
-                survey -> {
-                    System.out.println(survey.getTitle());
-                    survey.getQuestions().forEach(question -> System.out.println(question.getTitle()));
-                    survey.getQuestions().forEach(question ->
-                        System.out.println(question.getTitle())
-                    );
-                }
-        );
-
-        //test
-        //surveyService.findAllSurvey().get(4).getQuestions().get(5).getAnswers().get(5);
-
-
+        surveyService.getQuestion(q5.getId()).addAnswer(a9);
+        surveyService.getQuestion(q5.getId()).addAnswer(a10);
+        surveyService.getQuestion(q6.getId()).addAnswer(a11);
+        surveyService.getQuestion(q6.getId()).addAnswer(a12);
     }
 
 

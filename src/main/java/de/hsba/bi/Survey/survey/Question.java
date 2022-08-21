@@ -47,7 +47,26 @@ public class Question {
     public Question(Survey survey, String question){
         this.survey = survey;
         this.title = question;
+
+        this.getAnswers();
     }
+
+    public List<Answer> getAnswers(){
+        return this.answers;
+    }
+
+
+    public void addAnswer(Answer answer){
+        if(answers == null){
+            answers = new ArrayList<>();
+            answers.add(answer);
+        }else{
+            answers.add(answer);
+        }
+    }
+
+
+
 
 }
 
