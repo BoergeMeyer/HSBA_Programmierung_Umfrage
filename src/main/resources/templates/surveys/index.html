@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Umfragen</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>Umfrage</th>
+        <th>Beschreibung</th>
+        <th>Ersteller</th>
+        <th>Frage & Antworten</th>
+    </tr>
+    <tr th:each="survey : ${surveyAll}">
+        <td th:text="${survey.title}"></td>
+        <td th:text="${survey.description}"></td>
+        <td th:text="${survey.creator.getName()}"></td>
+        <td >
+            <div th:each ="questions : ${survey.getQuestions()}">
+                <p th:text="${questions.title}"></p>
+                <ul th:each ="answers : ${questions.getAnswers()}">
+                    <li th:text="${answers.title}"></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

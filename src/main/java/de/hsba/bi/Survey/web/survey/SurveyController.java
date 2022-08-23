@@ -1,4 +1,4 @@
-package de.hsba.bi.Survey.web;
+package de.hsba.bi.Survey.web.survey;
 
 import de.hsba.bi.Survey.survey.SurveyService;
 import lombok.RequiredArgsConstructor;
@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/surveys/")
 @RequiredArgsConstructor
-public class IndexController {
+public class SurveyController {
 
     private final SurveyService surveyService;
 
-    @GetMapping("/")
+    @GetMapping
     public String index(Model model) {
         model.addAttribute("surveyAll",surveyService.findAllSurvey());
-        return "index";
+        return "surveys/index";
     }
 }

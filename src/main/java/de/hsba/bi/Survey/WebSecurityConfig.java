@@ -18,18 +18,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/users").permitAll()
-
-                .antMatchers(HttpMethod.GET, "/journals/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/surveys/**").permitAll()
                 //.antMatchers("/users/**").hasRole(User.ADMIN_ROLE)
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                .loginPage("/login").permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/journals/")
-                .permitAll();
+                .logoutSuccessUrl("/").permitAll();
     }
 
     @Override
