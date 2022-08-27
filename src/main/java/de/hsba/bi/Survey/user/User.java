@@ -1,14 +1,12 @@
 package de.hsba.bi.Survey.user;
 
-import javax.persistence.*;
-
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -33,16 +31,26 @@ public class User {
     private Long id;
 
     @Getter
+    @Setter
     @Basic(optional = false)
     private String name;
 
+    @Getter
+    @Setter
     @Basic(optional = false)
     private String password;
 
+    @Getter
+    @Setter
     private String role;
 
     public User(String name, String password) {
         this.name = name;
         this.password = password;
+    }
+
+    public User(User user){
+        name = user.getName();
+        password = user.getPassword();
     }
 }

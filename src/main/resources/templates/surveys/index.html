@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Umfragen</title>
+    <link rel="stylesheet" th:href="@{/style.css}" type="text/css">
+</head>
+<body>
+<div th:replace="layout/menu :: menu"></div>
+<table border="1">
+    <tr>
+        <th>Umfrage</th>
+        <th>Beschreibung</th>
+        <th>Ersteller</th>
+        <th>Frage & Antworten</th>
+    </tr>
+    <tr th:each="survey : ${surveyAll}">
+        <td th:text="${survey.title}"></td>
+        <td th:text="${survey.description}"></td>
+        <td th:text="${survey.creator.getName()}"></td>
+        <td >
+            <div th:each ="questions : ${survey.getQuestions()}">
+                <p th:text="${questions.title}"></p>
+                <ul th:each ="answers : ${questions.getAnswers()}">
+                    <li th:text="${answers.title}"></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+<style>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+        background-color: #111;
+    }
+
+    .active {
+        background-color: #04AA6D;
+    }
+</style>
+</html>
