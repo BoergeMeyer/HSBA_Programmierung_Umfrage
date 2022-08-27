@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+            layout:decorate="~{layout}"
+            xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+            xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit or create a survey</title>
+</head>
+<body>
+<h1>Meine Umfragen</h1>
+<ul class="list-unstyled">
+  <li th:each="survey : ${surveysFromUser}">
+    <a th:href="@{/editsurvey/{id}(id=${survey.id})}" th:text="${survey.name}"></a>
+  </li>
+</ul>
+<h2>Umfrage erstellen</h2>
+<form sec:authorize="authenticated"
+      th:action="@{/survey}" class="form-row" method="post" th:object="${surveyForm}">
+  <div class="form-group col-md-3">
+    <input class="form-control mr-2" th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
+           placeholder="Name" th:field="*{name}" type="text" />
+  </div>
+  <div class="form-group col-md-1">
+    <button class="btn btn-primary mr-2" type="submit">Erstellen</button>
+  </div>
+
+</form>
+
+
+</body>
+</html>

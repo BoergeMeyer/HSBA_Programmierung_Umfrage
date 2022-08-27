@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Umfrage bearbeiten</title>
+</head>
+<body>
+<div class="my-4">
+  <h1 th:text="${'Umfrage' + editsurvey.survey.name}"></h1>
+</div>
+<li th:each="question : ${survey.questions}">
+  <a th:href="@{/editquestion/{id}(id=${survey.question.id})}" th:text="${question.name}"></a>
+</li>
+<form method="post" th:action="@{/editsurvey/{id}(id=${survey.id})}" th:object="${editsurveyform}">
+  <div class="form-group row">
+    <label class="col-form-label col-form-label-sm col-sm-2">Frage hinzufügen</label>
+    <div class="col-sm-10">
+      <input class="form-control form-control-sm" type="text"/>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button class="btn btn-primary btn-sm" type="submit">Hinzufügen</button>
+      <a class="btn btn-sm btn-outline-secondary ml-3" th:href="@{/editsurvey/{id}(id=${survey.id})}">Abbrechen</a></div>
+  </div>
+</form>
+
+</body>
+</html>
