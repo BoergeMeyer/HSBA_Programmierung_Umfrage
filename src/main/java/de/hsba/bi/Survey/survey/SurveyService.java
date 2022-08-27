@@ -1,13 +1,10 @@
 package de.hsba.bi.Survey.survey;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.task.DelegatingSecurityContextAsyncTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -72,5 +69,9 @@ public class SurveyService {
 
     public void deleteAnswer(Long id){
         answerRepository.deleteById(id);
+    }
+
+    public String returnNumberOfSurveys(){
+        return Integer.toString(surveyRepository.findAll().size());
     }
 }

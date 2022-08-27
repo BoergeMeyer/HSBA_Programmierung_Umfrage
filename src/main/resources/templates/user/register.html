@@ -1,35 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Registrierung</title>
+    <link th:href="@{/style.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/user_style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <form action="#" th:action="@{/user/registerUser}" th:object="${user}" method="post">
-        <div>
-            <label for="username"> Benutzername:</label>
-            <input type="text" id="username" name="username" placeholder="Dein Benutzername..."
-                   minlength="5"
-                   maxlength="15"
-            >
-        </div>
-
-        <div>
-            <label for="password"> Passwort:</label>
-            <input type="password" id="password" name="password" placeholder="Dein Passwort..."
-                   minlength="10"
-                   maxlength="10"
-            >
-        </div>
-
-        <div>
-            <label for="passwordrepeat"> Passwort:</label>
-            <input type="password" id="passwordrepeat" name="passwordrepeat" placeholder="Dein Passwort wiederholen..."
-                   minlength="10"
-                   maxlength="10"
-            >
-        </div>
-        <input type="submit" value="Submit">
-    </form>
+    <div th:replace="layout/menu :: menu"></div>
+    <div class="userform">
+        <form action="#" th:action="registerUser" th:object="${user}" method="post">
+            <ul>
+                <li><h1>Registrierung</h1></li>
+                <li>
+                    <label for="username"> Benutzername:</label>
+                    <input type="text" id="username" name="username" placeholder="Benutzername eingeben..."
+                           minlength="5"
+                           maxlength="15"
+                    >
+                </li>
+                <li>
+                    <label for="password"> Passwort:</label>
+                    <input type="password" id="password" name="password" placeholder="Passwort eingeben..."
+                           minlength="10"
+                           maxlength="10"
+                    >
+                </li>
+                <li>
+                    <label for="passwordrepeat"> Passwort:</label>
+                    <input type="password" id="passwordrepeat" name="passwordrepeat" placeholder="Passwort wiederholen..."
+                           minlength="10"
+                           maxlength="10"
+                    >
+                </li>
+                <li>
+                    <input type="submit" value="Registrieren">
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div th:replace="layout/footer :: footer"></div>
 </body>
 </html>

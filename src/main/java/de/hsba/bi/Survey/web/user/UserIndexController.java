@@ -48,7 +48,7 @@ public class UserIndexController {
         System.out.println("User creation initiated");
         User user = formConverter.update(new User(), form);
         userService.save(user);
-        return "index";
+        return "redirect:" + "/";
     }
 
     @GetMapping("list")

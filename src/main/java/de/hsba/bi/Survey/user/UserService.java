@@ -28,4 +28,8 @@ public class UserService {
     public Integer findUserByName(String username){
         return userRepository.findUserByName(username);
     }
+
+    public String returnNumberOfUsers(){
+        return Integer.toString(userRepository.findAll().size());
+    }
 }

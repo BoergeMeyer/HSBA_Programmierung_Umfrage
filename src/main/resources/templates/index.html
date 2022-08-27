@@ -6,39 +6,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="/static/style.css" th:href="@{static/style.css}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
 <body>
     <div th:replace="layout/menu :: menu"></div>
-    <h1>HOME</h1>
+    <!-- HEADER -->
+    <div class="header">
+        <div>
+            <h1>PROFESSIONELLE <br> UMFRAGEN ERSTELLEN</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+            </p>
+        </div>
+    </div>
+
+    <!-- REGISTRIERUNG -->
+    <div class="banner">
+        <a href="/users/registration">JETZT KOSTENLOS REGISTRIEREN!</a>
+    </div>
+
+    <!-- WERBUNG -->
+    <div class="advertisement">
+        <div>
+            <p th:text="${countUsers}"></p>
+            <h3>Benutzer</h3>
+        </div>
+        <div>
+            <p th:text="${countSurvey}"></p>
+            <h3>Umfragen</h3>
+        </div>
+        <div>
+            <p>0</p>
+            <h3>Ergebnisse</h3>
+        </div>
+    </div>
+    <div th:replace="layout/footer :: footer"></div>
 </body>
-<style>
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
-    }
-
-    li {
-        float: left;
-    }
-
-    li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-
-    li a:hover:not(.active) {
-        background-color: #111;
-    }
-
-    .active {
-        background-color: #04AA6D;
-    }
-</style>
 </html>

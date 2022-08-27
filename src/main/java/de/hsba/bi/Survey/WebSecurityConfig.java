@@ -20,7 +20,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users").permitAll()
                 .antMatchers(HttpMethod.GET, "/surveys/**").permitAll()
                 .antMatchers("/user/**").permitAll()
-                //.antMatchers("/users/**").hasRole(User.ADMIN_ROLE)
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -33,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/h2-console/**");
+        web.ignoring().antMatchers("/style.css");
     }
 
     @Bean

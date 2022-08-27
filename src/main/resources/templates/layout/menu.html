@@ -4,17 +4,19 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Menu</title>
 </head>
 <body>
 <th:block th:fragment="menu">
-    <ul>
-        <li><a href="/">Startseite</a></li>
-        <li><a href="/surveys/">Umfragen</a></li>
-        <li><a href="/own_surveys/">Eigene Umfragen</a></li>
-        <li style="float:right"><a class="active" href="/login">Anmelden</a></li>
-        <li style="float:right"><a class="active" href="/logout">Abmelden</a></li>
-    </ul>
+    <div class="menu">
+        <ul>
+            <li><a href="/">Startseite</a></li>
+            <li><a href="/surveys/">Umfragen</a></li>
+            <li><a href="/surveys/own_surveys">Eigene Umfragen</a></li>
+            <li style="float:right"><a class="active" href="/login">Anmelden</a></li>
+            <li style="float:right"><a class="active" href="/logout">Abmelden</a></li>
+        </ul>
+    </div>
 </th:block>
 </body>
 </html>
