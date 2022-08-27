@@ -11,24 +11,28 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class SurveyService {
-    private final SurveyRepository      surveyRepository;
-    private final QuestionRepository    questionRepository;
-    private final AnswerRepository      answerRepository;
+    private final SurveyRepository surveyRepository;
+    private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
 
     //methods for survey
-    public List<Survey> findAllSurvey(){
+    public List<Survey> findAllSurvey() {
         return surveyRepository.findAll();
     }
 
-    public Survey save(Survey survey){
+    public Survey save(Survey survey) {
         return surveyRepository.save(survey);
     }
 
-    public Survey getSurvey(Long id){
+    public Survey getSurvey(Long id) {
         return surveyRepository.findById(id).orElse(null);
     }
 
-    public void deleteSurvey(Long id){
+    public void deleteSurvey(Long id) {
         surveyRepository.deleteById(id);
+    }
+
+    public List<Survey> findCreatorJournals(String search) {
+        return surveyRepository.findByUsername(search.trim());
     }
 }
