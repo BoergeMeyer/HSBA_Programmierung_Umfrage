@@ -1,16 +1,14 @@
 package de.hsba.bi.Survey.survey;
 
-import javax.transaction.Transactional;
 import de.hsba.bi.Survey.user.User;
 import de.hsba.bi.Survey.user.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.transaction.Transactional;
 
 
 @Component
@@ -34,6 +32,14 @@ public class TestDataCreator {
         User börge = createUser("Börge", "123456");
         User erik = createUser("Erik", "123456");
         User bennett = createUser("Bennett", "123456");
+
+        userService.save(börge);
+        userService.save(erik);
+        userService.save(bennett);
+
+        userService.findAll().forEach(
+                user -> System.out.println(user.getName())
+        );
 
         //Umfrage Nr.1
         Survey survey1 = new Survey(börge);

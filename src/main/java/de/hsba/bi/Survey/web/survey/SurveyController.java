@@ -19,4 +19,5 @@ public class SurveyController {
         model.addAttribute("surveyAll",surveyService.findAllSurvey());
         return "surveys/index";
     }
+
 }
