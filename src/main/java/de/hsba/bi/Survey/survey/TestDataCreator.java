@@ -37,10 +37,6 @@ public class TestDataCreator {
         userService.save(erik);
         userService.save(bennett);
 
-        userService.findAll().forEach(
-                user -> System.out.println(user.getName())
-        );
-
         //Umfrage Nr.1
         Survey survey1 = new Survey(börge);
         survey1.setTitle("Umfrage Nr.1");

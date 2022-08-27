@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Footer</title>
+</head>
+<body>
+<th:block th:fragment="footer">
+    <!-- footer -->
+    <div class="footer">
+        <section>
+            <div>
+                <!-- Contact -->
+                <h3>Kontakt</h3>
+                <ul>
+                    <li><p><b>Börge Meyer</b> <br> boerge.meyer@myhsba.de</p></li>
+                    <li><p><b>Erik Mehling</b> <br> erik.mehling@myhsba.de</p></li>
+                    <li><p><b>Bennett Brockmann</b> <br> bennett.brockmann@myhsba.de</p></li>
+                </ul>
+            </div>
+            <div>
+                <!-- Url -->
+                <h3>Weitere Links</h3>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/surveys/">Umfragen</a></li>
+                    <li><a href="/user/registration">Registrierung</a></li>
+                </ul>
+            </div>
+            <div>
+                <!-- Notice -->
+                <h3>Information</h3>
+                <p>Die Internetseite wurde im Rahmen eines Projekt für das Modul "Programmierung 2" an der Hamburg School of Business Administration erstellt. Sie darf nicht für öffentliche Zwecke verwendet werden.</p>
+            </div>
+        </section>
+
+        <div>
+            <ul>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>
