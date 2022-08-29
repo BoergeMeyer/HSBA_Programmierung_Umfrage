@@ -32,10 +32,12 @@ public class TestDataCreator {
         User börge = createUser("Börge", "1234567890");
         User erik = createUser("Erik", "1234567890");
         User bennett = createUser("Bennett", "1234567890");
+        User egröb = createUser("Egröb", "1234567890");
 
         userService.save(börge);
         userService.save(erik);
         userService.save(bennett);
+        userService.save(egröb);
 
         userService.findAll().forEach(
                 user -> System.out.println(user.getId() + " " + user.getName())
