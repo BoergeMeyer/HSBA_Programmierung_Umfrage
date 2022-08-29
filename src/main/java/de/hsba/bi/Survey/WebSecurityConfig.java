@@ -21,6 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/surveys/**").permitAll()
                 .antMatchers("/surveys/**").permitAll()
                 .antMatchers("/surveys/mysurvey").permitAll()
+                .antMatchers("/surveys/edit").permitAll()
                 .antMatchers("/user/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

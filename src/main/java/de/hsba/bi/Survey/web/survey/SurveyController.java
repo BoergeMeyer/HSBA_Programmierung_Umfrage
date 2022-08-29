@@ -23,16 +23,18 @@ public class SurveyController {
         return "surveys/index";
     }
 
-    @GetMapping("mysurvey")
-    public String getSurvey( Model model){
-        model.addAttribute("getSurveyById", surveyService.findSurveyByUserId(userService.findAll().get(1).getId()));
-        return "surveys/listofmysurveys";
-    }
-
-    @GetMapping("mysurvey/{id}")
-    public String getSurvey(@PathVariable("id")Long id, Model model){
+    @GetMapping(path = "mysurvey/{id}")
+    public String getSurveyToShow(@PathVariable Long id, Model model){
         model.addAttribute("getSurveyById", surveyService.findSurveyByUserId(id));
         return "surveys/listofmysurveys";
     }
+
+    @GetMapping("edit/{id}")
+    public String getSurveyToEdit(@PathVariable Long id,Model model){
+        model.addAttribute("getSurveyById", surveyService.findSurveyByUserId(id));
+        return "surveys/editsurvey";
+    }
+
+
 
 }

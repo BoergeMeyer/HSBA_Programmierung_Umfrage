@@ -1,29 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Umfrage bearbeiten</title>
+  <title>Meine Umfragen</title>
+  <link rel="stylesheet" th:href="@{/style.css}" type="text/css">
 </head>
 <body>
-<div class="my-4">
-  <h1 th:text="${'Umfrage' + editsurvey.survey.name}"></h1>
-</div>
-<li th:each="question : ${survey.questions}">
-  <a th:href="@{/editquestion/{id}(id=${survey.question.id})}" th:text="${question.name}"></a>
-</li>
-<form method="post" th:action="@{/editsurvey/{id}(id=${survey.id})}" th:object="${editsurveyform}">
-  <div class="form-group row">
-    <label class="col-form-label col-form-label-sm col-sm-2">Frage hinzufügen</label>
-    <div class="col-sm-10">
-      <input class="form-control form-control-sm" type="text"/>
+<div th:replace="layout/menu :: menu"></div>
+<br><br><br>
+<form>
+  <div th:each="survey : ${getSurveyById}" class="survey">
+    <h3 th:text="${survey.title}"></h3>
+    <p>Beschreibung: <span th:text="${survey.description}"></span></p>
+    <div  th:each ="questions : ${survey.getQuestions()}">
+      <p  th:text="${questions.title}"></p>
+      <ul  th:each ="answers : ${questions.getAnswers()}">
+        <li><span th:text="${answers.title}"></span></li>
+      </ul>
+    </div>
+    <div>
+      <button type="button" value="delete">Löschen</button>
     </div>
   </div>
-  <div class="form-group row">
-    <div class="col-sm-10">
-      <button class="btn btn-primary btn-sm" type="submit">Hinzufügen</button>
-      <a class="btn btn-sm btn-outline-secondary ml-3" th:href="@{/editsurvey/{id}(id=${survey.id})}">Abbrechen</a></div>
-  </div>
 </form>
-
+<br><br><br>
+<div th:replace="layout/footer :: footer"></div>
 </body>
 </html>
