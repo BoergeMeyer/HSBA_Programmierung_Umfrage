@@ -2,8 +2,9 @@ html, body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    height: 100%;
     font-weight: 200;
+    height: 100%;
+    min-height: 100%;
 }
 
 /*
@@ -40,8 +41,39 @@ html, body{
     text-decoration: none;
 }
 
-.menu li a:hover {
+.menu a, button{
+    display: block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    text-decoration: none;
+    color: white;
+    text-align: center
+}
+
+.menu button{
+    height: 46px;
+}
+
+.menu li a:hover, button:hover {
     background-color: #111;
+}
+
+.menu li:last-child{
+    float: right;
 }
 
 .active {
@@ -258,4 +290,46 @@ html, body{
     padding: 8px 8px;
     width: 100px;
     margin: 0 auto;
+}
+
+.survey{
+    background-color: rgba(0, 105, 150,0.25);
+    border: 1px solid black;
+    margin: 50px 15px;
+}
+
+.survey h3{
+    padding: 10px 14px;
+    border-bottom: solid 1px black;
+    margin: 0;
+    background-color: rgba(0, 105, 150,1.0);
+    color: white;
+}
+
+.survey > p{
+    padding: 10px 10px;
+    border-bottom: solid 1px black;
+    margin: 0;
+}
+
+.survey div{
+    border-bottom: solid 1px black;
+    margin: 10px 14px;
+}
+
+.survey > div:last-child{
+    border-bottom: none;
+}
+
+.survey div > p{
+    font-size: 14pt;
+}
+
+.survey ul{
+    padding: 0;
+}
+
+.survey li{
+    list-style-type: none;
+    padding: 2px 15px;
 }

@@ -74,4 +74,8 @@ public class SurveyService {
     public String returnNumberOfSurveys(){
         return Integer.toString(surveyRepository.findAll().size());
     }
+
+    public List<Survey>findSurveyByUserId(Long id){
+        return surveyRepository.findSurveyByUserId(id);
+    }
 }

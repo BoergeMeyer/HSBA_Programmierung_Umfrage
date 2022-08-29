@@ -29,13 +29,19 @@ public class TestDataCreator {
         }
 
         // add some users
-        User börge = createUser("Börge", "123456");
-        User erik = createUser("Erik", "123456");
-        User bennett = createUser("Bennett", "123456");
+        User börge = createUser("Börge", "1234567890");
+        User erik = createUser("Erik", "1234567890");
+        User bennett = createUser("Bennett", "1234567890");
+        User egröb = createUser("Egröb", "1234567890");
 
         userService.save(börge);
         userService.save(erik);
         userService.save(bennett);
+        userService.save(egröb);
+
+        userService.findAll().forEach(
+                user -> System.out.println(user.getId() + " " + user.getName())
+        );
 
         //Umfrage Nr.1
         Survey survey1 = new Survey(börge);
