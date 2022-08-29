@@ -13,8 +13,15 @@
             <li><a href="/">Startseite</a></li>
             <li><a href="/surveys/">Umfragen</a></li>
             <li><a href="/surveys/own_surveys">Eigene Umfragen</a></li>
-            <li style="float:right"><a class="active" href="/login">Anmelden</a></li>
-            <li style="float:right"><a class="active" href="/logout">Abmelden</a></li>
+            <li class="active" sec:authorize="isAnonymous()"><a class="active" href="/login">Anmelden</a></li>
+            <li sec:authorize="authenticated">
+                <form method="post"
+                      th:action="@{/logout}">
+                    <button class="active" type="submit">
+                        Abmelden
+                    </button>
+                </form>
+            </li>
         </ul>
     </div>
 </th:block>

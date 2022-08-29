@@ -41,8 +41,39 @@ html, body{
     text-decoration: none;
 }
 
-.menu li a:hover {
+.menu a, button{
+    display: block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    text-decoration: none;
+    color: white;
+    text-align: center
+}
+
+.menu button{
+    height: 46px;
+}
+
+.menu li a:hover, button:hover {
     background-color: #111;
+}
+
+.menu li:last-child{
+    float: right;
 }
 
 .active {

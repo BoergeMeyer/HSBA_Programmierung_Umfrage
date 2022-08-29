@@ -1,26 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"
-      layout:decorate="~{layout}"
+<html layout:decorate="~{layout}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Registrierung</title>
+    <title>Login</title>
     <link th:href="@{/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div th:replace="layout/menu :: menu"></div>
-    <div class="mb-4" th:if="${param.error}">
-        <strong class="text-danger">Login fehlgeschlagen</strong>
-    </div>
-
-    <div class="mb-4" th:if="${param.logout}">
-        <strong>Sie haben sich erfolgreich abgemeldet</strong>
-    </div>
     <div class="userform">
-        <form action="#" th:action="registerUser" th:object="${user}" method="post">
+        <form  method="post" th:action="@{/login}">
             <ul>
-                <li><h1>Registrierung</h1></li>
+                <li><h1>Login</h1></li>
                 <li>
                     <label for="username"> Benutzername:</label>
                     <input type="text" id="username" name="username" placeholder="Benutzername eingeben..."
@@ -36,14 +28,7 @@
                     >
                 </li>
                 <li>
-                    <label for="passwordrepeat"> Passwort:</label>
-                    <input type="password" id="passwordrepeat" name="passwordrepeat" placeholder="Passwort wiederholen..."
-                           minlength="10"
-                           maxlength="10"
-                    >
-                </li>
-                <li>
-                    <input type="submit" value="Registrieren">
+                    <input type="submit" value="Anmelden">
                 </li>
             </ul>
         </form>
