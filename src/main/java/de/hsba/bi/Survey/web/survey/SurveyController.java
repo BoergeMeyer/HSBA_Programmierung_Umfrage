@@ -3,6 +3,8 @@ package de.hsba.bi.Survey.web.survey;
 import de.hsba.bi.Survey.survey.SurveyService;
 import de.hsba.bi.Survey.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +24,18 @@ public class SurveyController {
         model.addAttribute("surveyAll",surveyService.findAllSurvey());
         return "surveys/index";
     }
-
+    /*
     @GetMapping(path = "mysurvey/{id}")
     public String getSurveyToShow(@PathVariable Long id, Model model){
         model.addAttribute("getSurveyById", surveyService.findSurveyByUserId(id));
+        return "surveys/listofmysurveys";
+    }
+    */
+    @GetMapping(path = "mysurvey")
+    public String getSurveyToShow(Model model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name = principal instanceof UserDetails ? ((UserDetails) principal).getUsername() : null;
+        model.addAttribute("getSurveyById", surveyService.findSurveyByUsername(name));
         return "surveys/listofmysurveys";
     }
 

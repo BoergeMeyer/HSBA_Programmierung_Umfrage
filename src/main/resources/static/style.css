@@ -29,10 +29,6 @@ html, body{
     padding: 0;
 }
 
-.menu li {
-    float: left;
-}
-
 .menu li a {
     display: block;
     color: white;
@@ -72,12 +68,16 @@ html, body{
     background-color: #111;
 }
 
-.menu li:last-child{
+.active {
+    background-color: #04AA6D;
+}
+
+.right{
     float: right;
 }
 
-.active {
-    background-color: #04AA6D;
+.left{
+    float: left;
 }
 
 /*

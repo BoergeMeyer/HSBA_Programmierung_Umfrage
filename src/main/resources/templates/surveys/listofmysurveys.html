@@ -22,6 +22,26 @@
         </div>
     </div>
 <br><br><br>
+<div th:each="survey : ${getSurveyById}" class="survey">
+    <h3><span th:text="${survey.title}"></span><a href="">bearbeiten</a></h3>
+    <p>Beschreibung: <span th:text="${survey.description}"></span> <a href=""> bearbeiten </a></p>
+    <div  th:each ="questions : ${survey.getQuestions()}">
+        <p><span th:text="${questions.title}"></span><a href=""> bearbeiten </a><a href=""> löschen </a></p>
+        <ul  th:each ="answers : ${questions.getAnswers()}">
+            <li><input type="radio" name="" value=""><span th:text="${answers.title}"></span><a href=""></a><a href=""></a></li>
+        </ul>
+    </div>
+</div>
+<div th:each="survey : ${getSurveyById}" class="survey">
+    <h3><form><input type="text" th:value="${survey.title}"><button type="submit">Speichern</button></form></h3>
+    <p>Beschreibung: <form><input type="text" th:value="${survey.description}"><button type="submit">Speichern</button></form></p>
+    <div  th:each ="questions : ${survey.getQuestions()}">
+        <p><form><input type="text" th:value="${questions.title}"><button type="submit">Speichern</button></form></p>
+        <ul  th:each ="answers : ${questions.getAnswers()}">
+            <li><form><input type="text" th:value="${answers.title}"><button type="submit">Speichern</button></form></li>
+        </ul>
+    </div>
+</div>
 <div th:replace="layout/footer :: footer"></div>
 </body>
 </html>

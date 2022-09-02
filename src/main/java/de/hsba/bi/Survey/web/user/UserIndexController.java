@@ -48,6 +48,7 @@ public class UserIndexController {
         System.out.println("User creation initiated");
         User user = formConverter.update(new User(), form);
         userService.save(user);
+        userService.findAll().forEach(alluser -> System.out.println(alluser.getName()));
         return "redirect:" + "/";
     }
 

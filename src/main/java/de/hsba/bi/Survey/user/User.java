@@ -24,6 +24,14 @@ public class User {
         return null;
     }
 
+    public static Long getCurrentUserId(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(principal instanceof User){
+            return ((User) principal).getId();
+        }
+        return null;
+    }
+
     @Id
     @Getter
     @Column(name = "id", nullable = false)
