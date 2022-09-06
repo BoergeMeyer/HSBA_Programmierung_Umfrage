@@ -32,4 +32,8 @@ public class UserService {
     public String returnNumberOfUsers(){
         return Integer.toString(userRepository.findAll().size());
     }
+
+    public User returnUserByName(String username){
+        return userRepository.returnUserByName(username);
+    }
 }

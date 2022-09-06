@@ -21,6 +21,7 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(optional = false, targetEntity = Survey.class)
     private Survey survey;
 

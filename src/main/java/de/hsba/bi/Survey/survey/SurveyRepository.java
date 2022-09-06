@@ -18,4 +18,7 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
 
     @Query("SELECT s FROM Survey s WHERE s.creator.name= :name")
     List<Survey> findSurveyByUsername(@Param("name") String name);
+
+    @Query("SELECT s FROM Survey s WHERE s.id = :id AND s.creator.name = :name")
+    List<Survey> findSurveyByIdAndUsername(@Param("id") Long id,@Param("name") String name);
 }

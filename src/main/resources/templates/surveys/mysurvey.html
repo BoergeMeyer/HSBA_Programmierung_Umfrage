@@ -13,7 +13,7 @@
 <div style="margin: 0px auto; max-width: 1000px;">
     <br><br><br>
     <!-- UMFRAGE ERSTELLEN -->
-    <div class="surveycontainer">
+    <div>
         <h2>Umfragen erstellen:</h2>
         <div>
             <form  action="#" th:action="createSurvey" th:object="${survey}" method="post">
@@ -32,11 +32,8 @@
             </form>
         </div>
     </div>
-
-    <!-- Umfragen anzeigen zum Voting-->
-    <h1>UMFRAGEN zum Voting:</h1>
+    <!-- LIST OF SURVEYS -->
     <div th:each="survey : ${getSurveyById}">
-        <hr>
         <h3 th:text="${survey.title}"></h3>
         <p>Beschreibung: <span th:text="${survey.description}"></span></p>
         <div  th:each ="questions : ${survey.getQuestions()}">
@@ -45,23 +42,9 @@
                 <li><input type="radio" name="" value=""><span th:text="${answers.title}"></span></li>
             </ul>
         </div>
-        <div>
-            <button type="submit">Abschicken</button>
-        </div>
+        <a th:href="@{/surveys/edit(sid=${survey.id})}">Bearbeiten</a>
+        <a th:href="@{/surveys/delete(type='survey',sid=${survey.id},e=${survey.id})}">delete</a>
     </div>
-    <hr>
-
-    <div th:each="survey : ${getSurveyById}" class="survey">
-        <h3 th:text="${survey.title}"></h3>
-        <p>Beschreibung: <span th:text="${survey.description}"></span></p>
-        <div  th:each ="questions : ${survey.getQuestions()}">
-            <p  th:text="${questions.title}"></p>
-            <ul  th:each ="answers : ${questions.getAnswers()}">
-                <li><input type="radio" name="" value=""><span th:text="${answers.title}"></span></li>
-            </ul>
-        </div>
-    </div>
-
 </div>
 <div th:replace="layout/footer :: footer"></div>
 </body>
