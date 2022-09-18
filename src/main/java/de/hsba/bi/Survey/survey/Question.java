@@ -41,8 +41,6 @@ public class Question {
     public Question(Survey survey, String question){
         this.survey = survey;
         this.title = question;
-
-        this.getAnswers();
     }
 
     public void addAnswer(Answer answer){

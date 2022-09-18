@@ -16,6 +16,7 @@ public class SurveyFormConverter {
         return survey;
     }
 
+    //aktuell nicht genutzt
     Question createQuestion(Question question, CreateQuestionForm form){
         question.setTitle(form.getQuestion());
         question.addAnswer(new Answer(question,"Weiß ich nicht."));

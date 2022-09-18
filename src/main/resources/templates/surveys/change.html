@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form th:action="change+${changeType}" method="GET">
+        <input type="hidden" th:value="${objectId}" name="id">
+        <input type="text" name="objectTitle" th:value="${object.getTitle()}">
+        <button type="submit" th:value="change + ${changeType}">Ändern</button>
+  </form>
+</body>
+</html>
