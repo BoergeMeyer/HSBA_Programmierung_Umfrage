@@ -12,7 +12,7 @@
         <ul>
             <li class="left"><a href="/">Startseite</a></li>
             <li class="left"><a href="/surveys/">Umfragen</a></li>
-            <li class="left"><a href="/surveys/mysurvey">Eigene Umfragen</a></li>
+            <li class="left" sec:authorize="authenticated"><a href="/surveys/my">Eigene Umfragen</a></li>
             <li class="right" sec:authorize="isAnonymous()"><a class="active" href="/login">Anmelden</a></li>
             <li class="right" sec:authorize="isAnonymous()"><a class="active" href="/user/registration">Registrieren</a></li>
             <li class="right" sec:authorize="authenticated">

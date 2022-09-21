@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Meine Umfragen</title>
+    <link rel="stylesheet" th:href="@{/style.css}" type="text/css">
+</head>
+<body>
+<div th:replace="layout/menu :: menu"></div>
+<div style="margin: 0px auto; max-width: 1000px;">
+    <br><br><br>
+    <!-- UMFRAGE ERSTELLEN -->
+    <div>
+        <h2>Umfragen erstellen:</h2>
+        <div>
+            <form  action="#" th:action="createSurvey" th:object="${survey}" method="post">
+                <div>
+                    <label>Titel:</label>
+                    <input type="text" name="Title" value="" minlength="10">
+                </div>
+                <div>
+                    <label>Beschreibung:</label>
+                    <input type="text" name="" value="" minlength="20">
+                </div>
+                <div>
+                    <button type="reset">Zurücksetzen</button>
+                    <button type="submit">Erstellen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- LIST OF SURVEYS -->
+    <div th:each="survey : ${getSurveyById}">
+        <h3 th:text="${survey.title}"></h3>
+        <p>Beschreibung: <span th:text="${survey.description}"></span></p>
+        <div  th:each ="questions : ${survey.getQuestions()}">
+            <p  th:text="${questions.title}"></p>
+            <ul  th:each ="answers : ${questions.getAnswers()}">
+                <li><input type="radio" name="" value=""><span th:text="${answers.title}"></span></li>
+            </ul>
+        </div>
+        <a sec:authorize="authenticated" th:href="@{/surveys/edit(sid=${survey.id})}">Bearbeiten</a>
+        <a th:href="@{/surveys/delete(type='survey',sid=${survey.id},e=${survey.id})}">delete</a>
+    </div>
+</div>
+<div th:replace="layout/footer :: footer"></div>
+</body>
+</html>

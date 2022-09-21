@@ -9,4 +9,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT Count(u.id) from User u where u.name = :username")
     Integer findUserByName(@Param("username")String username);
+
+    @Query("SELECT u FROM User u WHERE u.name = :username")
+    User returnUserByName(@Param("username") String username);
 }

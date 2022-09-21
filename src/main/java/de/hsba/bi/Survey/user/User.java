@@ -32,6 +32,7 @@ public class User {
         return null;
     }
 
+
     @Id
     @Getter
     @Column(name = "id", nullable = false)

@@ -31,7 +31,6 @@ public class SurveyService {
         surveyRepository.deleteById(id);
     }
 
-
     //methods for question
 
     public List<Question> findAllQuestions(){
@@ -81,5 +80,9 @@ public class SurveyService {
 
     public List<Survey>findSurveyByUsername(String username){
         return surveyRepository.findSurveyByUsername(username);
+    }
+
+    public List<Survey>findSurveyByIdAndUsername(String username, Long id){
+        return surveyRepository.findSurveyByIdAndUsername(id, username);
     }
 }
