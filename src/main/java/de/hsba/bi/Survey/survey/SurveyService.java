@@ -85,4 +85,16 @@ public class SurveyService {
     public List<Survey>findSurveyByIdAndUsername(String username, Long id){
         return surveyRepository.findSurveyByIdAndUsername(id, username);
     }
+
+    public List<Survey>findSurveyById(Long id){
+        return surveyRepository.findSurveyById(id);
+    }
+
+    public List<Survey>findSurveyByAnswerId(Long id){
+        return surveyRepository.findSurveyByAnswerId(id);
+    }
+
+    public List<Question>findQuestionByAnswerId(Long id){
+        return surveyRepository.findQuestionByAnswerId(id);
+    }
 }
