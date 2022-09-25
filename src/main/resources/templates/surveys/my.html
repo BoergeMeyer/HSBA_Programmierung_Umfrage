@@ -40,7 +40,7 @@
         <div  th:each ="questions : ${survey.getQuestions()}">
             <p  th:text="${questions.title}"></p>
             <ul  th:each ="answers : ${questions.getAnswers()}">
-                <li><input type="radio" name="" value=""><span th:text="${answers.title}"></span></li>
+                <li><span th:text="${answers.title}"></span><span th:text="${result.calculateResult(questions.id,answers.id)}"></span></li>
             </ul>
         </div>
         <a sec:authorize="authenticated" th:href="@{/surveys/edit(sid=${survey.id})}">Bearbeiten</a>

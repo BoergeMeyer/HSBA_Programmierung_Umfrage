@@ -22,7 +22,7 @@
                             <ul th:each ="answers : ${questions.getAnswers()}">
                                 <lable>
                                     <li>
-                                        <input type="radio" name="answer" th:value="${answers.id}"><span th:text="${answers.title}"></span>
+                                        <input type="radio" name="answer" th:value="${answers.id}" required><span th:text="${answers.title}"></span>
                                     </li>
                                 </lable>
                             </ul>

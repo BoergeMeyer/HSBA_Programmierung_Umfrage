@@ -1,5 +1,6 @@
 package de.hsba.bi.Survey.web.survey;
 
+import de.hsba.bi.Survey.result.ResultService;
 import de.hsba.bi.Survey.survey.Answer;
 import de.hsba.bi.Survey.survey.Question;
 import de.hsba.bi.Survey.survey.Survey;
@@ -21,6 +22,7 @@ public class SurveyController {
     private final SurveyService surveyService;
     private final UserService userService;
     private final SurveyFormConverter formConverter;
+    private final ResultService resultService;
 
     @GetMapping
     public String index(Model model) {
@@ -36,6 +38,7 @@ public class SurveyController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = principal instanceof UserDetails ? ((UserDetails) principal).getUsername() : null;
         model.addAttribute("getSurveyById", surveyService.findSurveyByUsername(name));
+        model.addAttribute("result",resultService);
         return "surveys/my";
     }
 
@@ -48,7 +51,6 @@ public class SurveyController {
         surveyService.saveSurvey(survey);
         surveyService.findAllSurvey().forEach(surveys -> System.out.println(surveys.getTitle()));
         return "redirect:" + "my";
-        //return "redirect:" + "mysurvey";
     }
 
     @GetMapping("add")
