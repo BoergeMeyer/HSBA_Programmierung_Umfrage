@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<html lang="en"
+      layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Umfrage XYZ</title>
+    <link rel="stylesheet" th:href="@{/style.css}" type="text/css">
+</head>
+<body>
+<div th:replace="layout/menu :: menu"></div>
+<div style="margin: 0px auto; max-width: 1000px;">
+    <br><br><br>
+    <div>
+        <form method="post" th:action="@{/vote}">
+            <div th:each="survey : ${getSelectedSurvey}">
+                <h3 th:text="${survey.title}"></h3>
+                    <div  th:each ="questions : ${getQuestions}">
+                        <p  th:text="${questions.title}"></p>
+                            <ul th:each ="answers : ${questions.getAnswers()}">
+                                <lable>
+                                    <li>
+                                        <input type="radio" name="answer" th:value="${answers.id}" required><span th:text="${answers.title}"></span>
+                                    </li>
+                                </lable>
+                            </ul>
+                    </div>
+            </div>
+            <button type="submit" name="index" value="1">Nächste Frage</button>
+        </form>
+    </div>
+</div>
+<div th:replace="layout/footer :: footer"></div>
+</body>
+</html>

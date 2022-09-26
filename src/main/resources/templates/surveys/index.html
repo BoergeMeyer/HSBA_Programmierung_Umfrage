@@ -12,6 +12,7 @@
 <div th:replace="layout/menu :: menu"></div>
 <div th:each="survey : ${surveyAll}" class="survey">
     <h3 th:text="${survey.title}"></h3>
+    <a th:href="@{../voting/{sid}(sid = ${survey.id})}">Abstimmen</a>
     <p th:if="${survey.description != null}">Beschreibung: <span th:text="${survey.description}"></span></p>
     <div  th:each ="questions : ${survey.getQuestions()}">
         <p  th:text="${questions.title}"></p>
