@@ -1,21 +1,14 @@
 package de.hsba.bi.Survey.survey;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import javax.persistence.*;
-
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.core.annotation.Order;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -28,6 +21,7 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(optional = false, targetEntity = Survey.class)
     private Survey survey;
 
@@ -47,14 +41,7 @@ public class Question {
     public Question(Survey survey, String question){
         this.survey = survey;
         this.title = question;
-
-        this.getAnswers();
     }
-
-    public List<Answer> getAnswers(){
-        return this.answers;
-    }
-
 
     public void addAnswer(Answer answer){
         if(answers == null){

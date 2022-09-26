@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+</head>
+<body>
+<th:block th:fragment="menu">
+    <div class="menu">
+        <ul>
+            <li class="left"><a href="/">Startseite</a></li>
+            <li class="left"><a href="/surveys/">Umfragen</a></li>
+            <li class="left" sec:authorize="authenticated"><a href="/surveys/my">Eigene Umfragen</a></li>
+            <li class="right" sec:authorize="isAnonymous()"><a class="active" href="/login">Anmelden</a></li>
+            <li class="right" sec:authorize="isAnonymous()"><a class="active" href="/user/registration">Registrieren</a></li>
+            <li class="right" sec:authorize="authenticated">
+                <form method="post"
+                      th:action="@{/logout}">
+                    <button class="active" type="submit">
+                        Abmelden
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</th:block>
+</body>
+</html>

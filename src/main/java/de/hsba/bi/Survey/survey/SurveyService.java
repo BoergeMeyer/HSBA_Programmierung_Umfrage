@@ -1,13 +1,10 @@
 package de.hsba.bi.Survey.survey;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.task.DelegatingSecurityContextAsyncTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -33,7 +30,6 @@ public class SurveyService {
     public void deleteSurvey(Long id){
         surveyRepository.deleteById(id);
     }
-
 
     //methods for question
 
@@ -72,5 +68,33 @@ public class SurveyService {
 
     public void deleteAnswer(Long id){
         answerRepository.deleteById(id);
+    }
+
+    public String returnNumberOfSurveys(){
+        return Integer.toString(surveyRepository.findAll().size());
+    }
+
+    public List<Survey>findSurveyByUserId(Long id){
+        return surveyRepository.findSurveyByUserId(id);
+    }
+
+    public List<Survey>findSurveyByUsername(String username){
+        return surveyRepository.findSurveyByUsername(username);
+    }
+
+    public List<Survey>findSurveyByIdAndUsername(String username, Long id){
+        return surveyRepository.findSurveyByIdAndUsername(id, username);
+    }
+
+    public List<Survey>findSurveyById(Long id){
+        return surveyRepository.findSurveyById(id);
+    }
+
+    public List<Survey>findSurveyByAnswerId(Long id){
+        return surveyRepository.findSurveyByAnswerId(id);
+    }
+
+    public List<Question>findQuestionByAnswerId(Long id){
+        return surveyRepository.findQuestionByAnswerId(id);
     }
 }

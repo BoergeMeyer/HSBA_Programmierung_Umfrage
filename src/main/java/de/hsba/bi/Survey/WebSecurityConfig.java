@@ -18,23 +18,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/users").permitAll()
-
-                .antMatchers(HttpMethod.GET, "/journals/**").permitAll()
-                //.antMatchers("/users/**").hasRole(User.ADMIN_ROLE)
+                .antMatchers(HttpMethod.GET, "/surveys/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/surveys/**").permitAll()
+                .antMatchers("/surveys/**").permitAll()
+                .antMatchers("/surveys/mysurvey").permitAll()
+                .antMatchers("/surveys/edit").permitAll()
+                .antMatchers("mysurvey").permitAll()
+                .antMatchers("/user/**").permitAll()
+                .antMatchers("/voting").permitAll()
+                .antMatchers("/voting/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/voting").permitAll()
+                .antMatchers(HttpMethod.POST, "/voting").permitAll()
+                .antMatchers().permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                .loginPage("/login").permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/journals/")
-                .permitAll();
+                .logoutSuccessUrl("/").permitAll();
     }
 
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/h2-console/**");
+        web.ignoring().antMatchers("/style.css");
     }
 
     @Bean

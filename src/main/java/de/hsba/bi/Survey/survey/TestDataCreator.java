@@ -1,16 +1,14 @@
 package de.hsba.bi.Survey.survey;
 
-import javax.transaction.Transactional;
 import de.hsba.bi.Survey.user.User;
 import de.hsba.bi.Survey.user.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.transaction.Transactional;
 
 
 @Component
@@ -31,9 +29,19 @@ public class TestDataCreator {
         }
 
         // add some users
-        User börge = createUser("Börge", "123456");
-        User erik = createUser("Erik", "123456");
-        User bennett = createUser("Bennett", "123456");
+        User börge = createUser("BörgeM", "1234567890");
+        User erik = createUser("ErikM", "1234567890");
+        User bennett = createUser("BennettB", "1234567890");
+        User egröb = createUser("Egröb", "1234567890");
+
+        userService.save(börge);
+        userService.save(erik);
+        userService.save(bennett);
+        userService.save(egröb);
+
+        userService.findAll().forEach(
+                user -> System.out.println(user.getId() + " " + user.getName())
+        );
 
         //Umfrage Nr.1
         Survey survey1 = new Survey(börge);
@@ -43,23 +51,32 @@ public class TestDataCreator {
 
         Question q1 = new Question(survey1,"Testfrage Nr.1");
         Question q2 = new Question(survey1,"Testfrage Nr.2");
+        Question q11 = new Question(survey1,"Testfrage Nr.3");
         surveyService.saveQuestion(q1);
         surveyService.saveQuestion(q2);
+        surveyService.saveQuestion(q11);
         surveyService.getSurvey(survey1.getId()).addQuestion(q1);
         surveyService.getSurvey(survey1.getId()).addQuestion(q2);
+        surveyService.getSurvey(survey1.getId()).addQuestion(q11);
 
         Answer a1 = new Answer(q1,"Antwort 1");
         Answer a2 = new Answer(q1,"Antwort 2");
         Answer a3 = new Answer(q2,"Antwort 3");
         Answer a4 = new Answer(q2,"Antwort 4");
+        Answer a15 = new Answer(q2,"Antwort 5");
+        Answer a16 = new Answer(q2,"Antwort 6");
         surveyService.saveAnswer(a1);
         surveyService.saveAnswer(a2);
         surveyService.saveAnswer(a3);
         surveyService.saveAnswer(a4);
+        surveyService.saveAnswer(a15);
+        surveyService.saveAnswer(a16);
         surveyService.getQuestion(q1.getId()).addAnswer(a1);
         surveyService.getQuestion(q1.getId()).addAnswer(a2);
         surveyService.getQuestion(q2.getId()).addAnswer(a3);
         surveyService.getQuestion(q2.getId()).addAnswer(a4);
+        surveyService.getQuestion(q11.getId()).addAnswer(a15);
+        surveyService.getQuestion(q11.getId()).addAnswer(a16);
 
 
         //Umfrage Nr.2
@@ -112,6 +129,11 @@ public class TestDataCreator {
         surveyService.getQuestion(q5.getId()).addAnswer(a10);
         surveyService.getQuestion(q6.getId()).addAnswer(a11);
         surveyService.getQuestion(q6.getId()).addAnswer(a12);
+
+        surveyService.findSurveyByUsername("Börge").forEach(
+                survey -> System.out.println(survey.getId())
+        );
+
     }
 
 

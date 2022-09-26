@@ -1,6 +1,5 @@
 package de.hsba.bi.Survey.survey;
 
-import de.hsba.bi.Survey.survey.Question;
 import de.hsba.bi.Survey.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +10,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -61,7 +59,6 @@ public class Survey {
             questions.add(question);
         }
     }
-
 
 }
 

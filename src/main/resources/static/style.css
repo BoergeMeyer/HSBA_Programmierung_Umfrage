@@ -1,0 +1,382 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-weight: 200;
+    height: 100%;
+    min-height: 100%;
+}
+
+/*
+
+            MENU BAR
+
+*/
+.menu{
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    z-index: 1;
+    top: 0;
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
+}
+.menu ul {
+    list-style-type: none;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.menu a, .menu button{
+    display: block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    text-decoration: none;
+    color: white;
+    text-align: center
+}
+
+.menu button{
+    height: 46px;
+}
+
+.menu li a:hover, button:hover {
+    background-color: #111;
+}
+
+.active {
+    background-color: #04AA6D;
+}
+
+.right{
+    float: right;
+}
+
+.left{
+    float: left;
+}
+
+/*
+
+            FOOTER
+
+*/
+
+.footer{
+    background-color: rgba(43,43,43,1.0);
+    color: rgba(140,140,140,1.0);
+}
+
+.footer h3{
+    font-weight: 400;
+    text-align: center;
+}
+
+.footer ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer section{
+    display: grid;
+    columns: 3;
+    grid-template-columns: auto auto auto;
+    grid-gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.footer section > div{
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+
+.footer section > div:first-child > h3{
+    width: 100%;
+    height: inherit;
+}
+
+.footer section > div:first-child > ul,
+.footer section > div:nth-child(2) > ul{
+    text-align: center;
+}
+
+.footer section > div:nth-child(2) > ul > li {
+    margin: 2.5px auto;
+}
+
+.footer section > div:nth-child(2) > ul > li > a{
+    text-decoration: none;
+    color: rgba(140,140,140,1.0);
+    transition: 0.5s;
+}
+
+.footer section > div:nth-child(2) > ul > li > a:hover{
+    text-decoration: none;
+    color: rgba(255,255,255,1.0);
+    transition: 0.5s;
+}
+
+
+/*
+
+            INDEX
+
+ */
+
+.header{
+    background-color: rgba(0, 105, 150,1.0);
+    color: white;
+    height: 100%;
+    min-width: 100%;
+    display: flex;
+}
+
+.header div{
+    width: 80%;
+    margin: auto auto;
+}
+
+.header h1{
+    font-size: 45pt;
+    margin: 0;
+}
+
+.header p{
+    font-size: 20pt;
+    text-align: justify;
+    margin-left: 0;
+}
+
+.banner{
+    height: 25%;
+    display:flex;
+}
+
+.banner a{
+    margin: auto;
+    width: 80%;
+    font-size: 35pt;
+    text-decoration: none;
+    text-align: center;
+    padding: 15px 10px;
+    color: rgba(0, 105, 150,1.0);
+    transition: 0.75s;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+
+}
+
+.banner a:hover{
+    width: 100%;
+    transition: 0.5s;
+}
+
+
+.advertisement{
+    height: 50%;
+    width: 100%;
+    display: grid;
+    grid-column: 3;
+    grid-template-columns: auto auto auto;
+    grid-gap: 20px;
+}
+
+.advertisement div{
+    width: 100%;
+    margin: auto;
+}
+
+.advertisement p{
+    font-size: 80pt;
+    text-align: center;
+    margin: 0;
+}
+
+.advertisement h3{
+    text-align: center;
+    font-weight: lighter;
+}
+
+
+/*
+
+        USER SECTION - REGISTRATION
+
+ */
+
+.userform{
+    background-color: rgba(0, 105, 150,1.0);
+    padding: 50px;
+    height: 100%;
+    display: flex;
+    color: white;
+}
+
+.userform > div{
+    margin: auto;
+    width: 100%;
+    height: 80%;
+}
+
+.userform h1{
+    text-align: center;
+    margin: 0 auto;
+    font-weight: 300;
+}
+
+.userform form{
+    min-width: 400px;
+    margin: auto;
+    display: flex;
+}
+
+.userform ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.userform li{
+    width: 400px;
+    display: flex;
+    padding: 10px 0px;
+    margin: auto;
+}
+
+.userform label{
+    width: 115px;
+    margin: auto 10px auto auto;
+    height: 25px;
+    line-height: 25px;
+}
+
+.userform input[type=text], input[type=password]{
+    width: 150px;
+    margin: 0 auto 0 0;
+    height: 25px;
+    padding: 0 10px;
+}
+
+.userform input[type=submit]{
+    padding: 8px 8px;
+    width: 100px;
+    margin: 0 auto;
+}
+
+.survey{
+    background-color: rgba(0, 105, 150,0.25);
+    border: 1px solid black;
+    margin: 50px 15px;
+}
+
+.survey h3{
+    padding: 10px 14px;
+    border-bottom: solid 1px black;
+    margin: 0;
+    background-color: rgba(0, 105, 150,1.0);
+    color: white;
+}
+
+.survey > p{
+    padding: 10px 10px;
+    border-bottom: solid 1px black;
+    margin: 0;
+}
+
+.survey div{
+    border-bottom: solid 1px black;
+    margin: 10px 14px;
+}
+
+.survey > div:last-child{
+    border-bottom: none;
+}
+
+.survey div > p{
+    font-size: 14pt;
+}
+
+.survey ul{
+    padding: 0;
+}
+
+.survey li{
+    list-style-type: none;
+    padding: 2px 15px;
+}
+
+
+
+
+
+
+/* Umfrage erstellen*/
+
+/* UMFRAGE */
+
+.surveycontainer{
+    border: 1px solid black;
+}
+
+.surveycontainer h2{
+    padding: 10px 16px 5px 16px;
+    margin-top: 0;
+    font-weight: normal;
+    background-color: #8ebbed;
+}
+
+.surveycontainer > div{
+    padding: 10px 16px;
+}
+
+.surveycontainer > div > form > div{
+    margin: 10px 0;
+}
+
+.surveycontainer label{
+    padding: 6px 6px 6px 0;
+    display: inline-block;
+    width: 175px;
+}
+.surveycontainer input[type=text]{
+    width: 50%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.surveycontainer button{
+    width: 100px;
+    padding: 5px;
+    margin: 2px 0px;
+}

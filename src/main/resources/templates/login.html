@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link th:href="@{/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div th:replace="layout/menu :: menu"></div>
+    <div class="userform">
+        <form  method="post" th:action="@{/login}">
+            <ul>
+                <li><h1>Login</h1></li>
+                <li>
+                    <label for="username"> Benutzername:</label>
+                    <input type="text" id="username" name="username" placeholder="Benutzername eingeben..."
+                           minlength="5"
+                           maxlength="15"
+                    >
+                </li>
+                <li>
+                    <label for="password"> Passwort:</label>
+                    <input type="password" id="password" name="password" placeholder="Passwort eingeben..."
+                           minlength="10"
+                           maxlength="10"
+                    >
+                </li>
+                <li>
+                    <input type="submit" value="Anmelden">
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div th:replace="layout/footer :: footer"></div>
+</body>
+</html>

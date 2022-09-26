@@ -1,12 +1,10 @@
 package de.hsba.bi.Survey.user;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
+import javax.transaction.Transactional;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -25,5 +23,17 @@ public class UserService {
 
     public User findCurrentUser() {
         return userRepository.findByName(User.getCurrentUsername());
+    }
+
+    public Integer findUserByName(String username){
+        return userRepository.findUserByName(username);
+    }
+
+    public String returnNumberOfUsers(){
+        return Integer.toString(userRepository.findAll().size());
+    }
+
+    public User returnUserByName(String username){
+        return userRepository.returnUserByName(username);
     }
 }
