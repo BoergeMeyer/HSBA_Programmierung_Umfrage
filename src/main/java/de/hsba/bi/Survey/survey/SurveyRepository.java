@@ -10,6 +10,12 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
     @Query("select distinct s from Survey s join s.questions q where s.title like %:search%")
     List<Survey> findByEntryDescription(@Param("search") String search);
 
+    @Query("SELECT s FROM Survey s WHERE s.is_locked = 0")
+    List<Survey> findAllSurveyNotLocked();
+
+    @Query("SELECT s FROM Survey s WHERE s.creator.name NOT LIKE :username")
+    List<Survey> findAllSurveyNotFromUser(@Param("username") String username);
+
     @Query("select s from Survey s where s.creator.name like %:search%")
     List<Survey> findByUsername(@Param("search") String search);
 

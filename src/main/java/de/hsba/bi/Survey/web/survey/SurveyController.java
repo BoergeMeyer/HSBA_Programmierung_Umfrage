@@ -26,11 +26,19 @@ public class SurveyController {
 
     @GetMapping
     public String index(Model model) {
-        model.addAttribute("surveyAll",surveyService.findAllSurvey());
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name = principal instanceof UserDetails ? ((UserDetails) principal).getUsername() : null;
+        if(name == null) {
+            model.addAttribute("surveyAll",surveyService.findAllSurveyNotLocked());
+        }else{
+            model.addAttribute("surveyAllWithoutFromUser",surveyService.findAllSurveyNotFromUser(name));
+        }
+        surveyService.findAllSurveyNotLocked().forEach(
+                survey -> System.out.println(survey.getIs_locked())
+        );
         return "surveys/index";
     }
-
-    /* SEKTION - EIGENE UMFRAGEN */
 
     // Eigene Umfragen auflisten
     @GetMapping(path = "my")
@@ -140,8 +148,6 @@ public class SurveyController {
         return "redirect:" + "edit?sid=" + Long.toString(sid);
     }
 
-
-
     //Umfrage, Frage oder Antwort wird gelöscht
     @GetMapping("delete")
     public String delete(@RequestParam Long sid, @RequestParam Long e, @RequestParam String type){
@@ -160,6 +166,13 @@ public class SurveyController {
         }
         System.out.println(type);
         return (type == "survey") ? ":redirect" + "my" : "redirect:" + "edit?sid=" + Long.toString(sid);
+    }
+
+    @GetMapping("is_locked")
+    public String changeIsLocked(@RequestParam Long sid,@RequestParam int status){
+        surveyService.getSurvey(sid).setIs_locked(status);
+        System.out.println("MSG: Status der Umfrage wurde auf " + surveyService.getSurvey(sid).getIs_locked() + " gesetzt.");
+        return "index";
     }
 
 }

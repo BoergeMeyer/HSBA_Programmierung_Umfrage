@@ -1,5 +1,6 @@
 package de.hsba.bi.Survey.web;
 
+import de.hsba.bi.Survey.result.ResultService;
 import de.hsba.bi.Survey.survey.SurveyService;
 import de.hsba.bi.Survey.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +20,13 @@ public class IndexController {
 
     private final SurveyService surveyService;
     private final UserService userService;
+    private final ResultService resultService;
 
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("countSurvey",surveyService.returnNumberOfSurveys());
         model.addAttribute("countUsers",userService.returnNumberOfUsers());
+        //model.addAttribute("countResult",resultService.returnNumberOfResult());
         return "index";
     }
 

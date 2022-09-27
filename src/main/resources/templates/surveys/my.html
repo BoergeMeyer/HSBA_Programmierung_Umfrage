@@ -11,42 +11,64 @@
 </head>
 <body>
 <div th:replace="layout/menu :: menu"></div>
-<div style="margin: 0px auto; max-width: 1000px;">
-    <br><br><br>
-    <!-- UMFRAGE ERSTELLEN -->
+
+<div class="content" sec:authorize="authenticated" >
     <div>
-        <h2>Umfragen erstellen:</h2>
-        <div>
-            <form  action="#" th:action="createSurvey" th:object="${survey}" method="post">
-                <div>
-                    <label>Titel:</label>
-                    <input type="text" name="Title" value="" minlength="10">
-                </div>
-                <div>
-                    <label>Beschreibung:</label>
-                    <input type="text" name="" value="" minlength="20">
-                </div>
-                <div>
-                    <button type="reset">Zurücksetzen</button>
-                    <button type="submit">Erstellen</button>
-                </div>
-            </form>
+        <!-- UMFRAGE ERSTELLEN -->
+        <div class="ShowSurvey" >
+            <h3>Neue Umfrage erstellen:</h3>
+            <div>
+                <form class="selection" action="#" th:action="createSurvey" th:object="${survey}" method="post">
+                    <div>
+                        <label>Titel:</label>
+                        <input type="text" name="Title" value="" minlength="10">
+                        <button type="reset" name="button">Zurücksetzen</button>
+                    </div>
+                    <div>
+                        <label>Beschreibung:</label>
+                        <input type="text" name="" value="" minlength="20">
+                        <button type="submit">Umfrage erstellen</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-    <!-- LIST OF SURVEYS -->
-    <div th:each="survey : ${getSurveyById}">
-        <h3 th:text="${survey.title}"></h3>
-        <p>Beschreibung: <span th:text="${survey.description}"></span></p>
-        <div  th:each ="questions : ${survey.getQuestions()}">
-            <p  th:text="${questions.title}"></p>
-            <ul  th:each ="answers : ${questions.getAnswers()}">
-                <li><span th:text="${answers.title}"></span><span th:text="${result.calculateResult(questions.id,answers.id)}"></span></li>
-            </ul>
+
+        <br>
+
+        <!-- UMFRAGE ÜBERSICHT -->
+        <div th:each="survey : ${getSurveyById}" class="ShowSurvey">
+            <div>
+                <h3 th:text="${survey.title}"></h3>
+                <p>Beschreibung: <span th:text="${survey.description}"></span></p>
+            </div>
+            <!-- Fragen -->
+            <div th:each ="questions : ${survey.getQuestions()}">
+                <hr>
+                <ul class="edit">
+                    <li><p th:text="${questions.title}"></p></li>
+                </ul>
+                <!-- Antworten -->
+                <ul>
+                    <li th:each ="answers : ${questions.getAnswers()}">
+                        <ul>
+                            <li><span th:text="${answers.title}"></span><span> | </span><span th:text="${result.calculateResult(questions.id,answers.id)}"></span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <div class="selection">
+                <ul>
+                    <li><a th:href="@{/surveys/edit(sid=${survey.id})}">Umfrage bearbeiten</a></li>
+                    <li><a th:href="@{/surveys/delete(type='survey',sid=${survey.id},e=${survey.id})}">Umfrage löschen</a></li>
+                    <li th:if="${survey.getIs_locked()==0}"><a th:href="@{/surveys/is_locked(status=1,sid=${survey.id})}">Umfrage sperren</a></li>
+                    <li th:if="${survey.getIs_locked()==1}"><a th:href="@{/surveys/is_locked(status=0,sid=${survey.id})}">Umfrage freischalten</a></li>
+                </ul>
+            </div>
         </div>
-        <a sec:authorize="authenticated" th:href="@{/surveys/edit(sid=${survey.id})}">Bearbeiten</a>
-        <a th:href="@{/surveys/delete(type='survey',sid=${survey.id},e=${survey.id})}">delete</a>
     </div>
 </div>
+
 <div th:replace="layout/footer :: footer"></div>
 </body>
 </html>

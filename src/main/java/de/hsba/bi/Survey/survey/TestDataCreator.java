@@ -46,6 +46,7 @@ public class TestDataCreator {
         //Umfrage Nr.1
         Survey survey1 = new Survey(börge);
         survey1.setTitle("Umfrage Nr.1");
+        survey1.setIs_locked(0);
         survey1.setDescription("Optionale Testbeschreibung");
         surveyService.saveSurvey(survey1);
 
@@ -82,6 +83,7 @@ public class TestDataCreator {
         //Umfrage Nr.2
         Survey survey2 = new Survey(erik);
         survey2.setTitle("Umfrage Nr.2");
+        survey2.setIs_locked(0);
         surveyService.saveSurvey(survey2);
 
         Question q3 = new Question(survey1,"Testfrage Nr.3");
@@ -133,7 +135,6 @@ public class TestDataCreator {
         surveyService.findSurveyByUsername("Börge").forEach(
                 survey -> System.out.println(survey.getId())
         );
-
     }
 
 

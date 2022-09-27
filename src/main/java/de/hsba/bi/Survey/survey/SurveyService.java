@@ -19,6 +19,14 @@ public class SurveyService {
         return surveyRepository.findAll();
     }
 
+    public List<Survey> findAllSurveyNotLocked(){
+        return surveyRepository.findAllSurveyNotLocked();
+    }
+
+    public List<Survey> findAllSurveyNotFromUser(String username){
+        return surveyRepository.findAllSurveyNotFromUser(username);
+    }
+
     public Survey saveSurvey(Survey survey){
         return surveyRepository.save(survey);
     }
