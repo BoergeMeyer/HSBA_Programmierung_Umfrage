@@ -61,6 +61,8 @@
                 <ul>
                     <li><a th:href="@{/surveys/edit(sid=${survey.id})}">Umfrage bearbeiten</a></li>
                     <li><a th:href="@{/surveys/delete(type='survey',sid=${survey.id},e=${survey.id})}">Umfrage löschen</a></li>
+                    <li th:if="${survey.getIs_locked()==0}"><a th:href="@{/surveys/is_locked(status=1,sid=${survey.id})}">Umfrage sperren</a></li>
+                    <li th:if="${survey.getIs_locked()==1}"><a th:href="@{/surveys/is_locked(status=0,sid=${survey.id})}">Umfrage freischalten</a></li>
                 </ul>
             </div>
         </div>

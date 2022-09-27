@@ -2,6 +2,7 @@
 <html lang="en"
       layout:decorate="~{layout}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +14,17 @@
 
 <div class="content">
     <div>
-        <div th:each="survey : ${surveyAll}" class="selectSurvey">
+
+        <div sec:authorize="authenticated" th:each="survey : ${surveyAllWithoutFromUser}" class="selectSurvey">
+            <h3 th:text="${survey.title}"></h3>
+            <hr>
+            <div th:if="${survey.description != null}">Beschreibung: <span th:text="${survey.description}"></span></div>
+            <div class="selection">
+                <ul><li><a th:href="@{../voting/{sid}(sid = ${survey.id})}">Abstimmen</a></li><li><a href="">Auswertung</a></li></ul>
+            </div>
+        </div>
+
+        <div sec:authorize="isAnonymous()" th:each="survey : ${surveyAll}" class="selectSurvey">
             <h3 th:text="${survey.title}"></h3>
             <hr>
             <div th:if="${survey.description != null}">Beschreibung: <span th:text="${survey.description}"></span></div>

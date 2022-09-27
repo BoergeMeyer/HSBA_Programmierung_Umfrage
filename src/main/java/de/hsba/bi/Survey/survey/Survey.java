@@ -43,8 +43,13 @@ public class Survey {
     @OneToMany(targetEntity = Question.class)
     private List<Question> questions;
 
+    @Setter
+    @Getter
+    private int is_locked;
+
     public Survey(final User creator){
         this.creator = creator;
+        this.is_locked = 1;
     }
 
     public boolean isOwnedByCurrentUser() {
