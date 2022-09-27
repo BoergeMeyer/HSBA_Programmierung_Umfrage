@@ -2,6 +2,7 @@
 <html lang="en"
       layout:decorate="~{layout}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -10,15 +11,27 @@
 </head>
 <body>
 <div th:replace="layout/menu :: menu"></div>
-<div th:each="survey : ${surveyAll}" class="survey">
-    <h3 th:text="${survey.title}"></h3>
-    <a th:href="@{../voting/{sid}(sid = ${survey.id})}">Abstimmen</a>
-    <p th:if="${survey.description != null}">Beschreibung: <span th:text="${survey.description}"></span></p>
-    <div  th:each ="questions : ${survey.getQuestions()}">
-        <p  th:text="${questions.title}"></p>
-        <ul  th:each ="answers : ${questions.getAnswers()}">
-            <li><span th:text="${answers.title}"></span></li>
-        </ul>
+
+<div class="content">
+    <div>
+
+        <div sec:authorize="authenticated" th:each="survey : ${surveyAllWithoutFromUser}" class="selectSurvey">
+            <h3 th:text="${survey.title}"></h3>
+            <hr>
+            <div th:if="${survey.description != null}">Beschreibung: <span th:text="${survey.description}"></span></div>
+            <div class="selection">
+                <ul><li><a th:href="@{../voting/{sid}(sid = ${survey.id})}">Abstimmen</a></li><li><a href="">Auswertung</a></li></ul>
+            </div>
+        </div>
+
+        <div sec:authorize="isAnonymous()" th:each="survey : ${surveyAll}" class="selectSurvey">
+            <h3 th:text="${survey.title}"></h3>
+            <hr>
+            <div th:if="${survey.description != null}">Beschreibung: <span th:text="${survey.description}"></span></div>
+            <div class="selection">
+                <ul><li><a th:href="@{../voting/{sid}(sid = ${survey.id})}">Abstimmen</a></li><li><a href="">Auswertung</a></li></ul>
+            </div>
+        </div>
     </div>
 </div>
 <div th:replace="layout/footer :: footer"></div>

@@ -22,4 +22,7 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
 
     @Query("SELECT COUNT(r.questionID) AS COUNT_QID FROM Result r WHERE r.questionID = :qid ")
     Integer countQuestionID(@RequestParam("qid") Long qid);
+
+    @Query("SELECT DISTINCT r.user, r.surveyID FROM Result r")
+    Integer countResult();
 }
