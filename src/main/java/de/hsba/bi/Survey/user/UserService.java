@@ -1,6 +1,8 @@
 package de.hsba.bi.Survey.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -35,5 +37,10 @@ public class UserService {
 
     public User returnUserByName(String username){
         return userRepository.returnUserByName(username);
+    }
+
+    public String getUserDetails(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return principal instanceof UserDetails ? ((UserDetails) principal).getUsername() : "";
     }
 }

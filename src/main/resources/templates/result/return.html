@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Umfragen</title>
+    <link rel="stylesheet" th:href="@{/style.css}" type="text/css">
+</head>
+<body>
+<div th:replace="layout/menu :: menu"></div>
+
+<div class="header">
+    <div>
+        <h1 style="text-align: center">Danke für die Teilnahme!</h1>
+        <a style="color:white" th:href="@{/surveys/}"> >>>Zurück zu den Umfragen<<< </a>
+    </div>
+</div>
+
+<div th:replace="layout/footer :: footer"></div>
+</body>
+</html>

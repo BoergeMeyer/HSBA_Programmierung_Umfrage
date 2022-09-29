@@ -1,7 +1,6 @@
 package de.hsba.bi.Survey.web.user;
 
 
-import de.hsba.bi.Survey.survey.SurveyService;
 import de.hsba.bi.Survey.user.User;
 import de.hsba.bi.Survey.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -13,14 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-//import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/user/")
 @RequiredArgsConstructor
 public class UserIndexController {
 
-    private final SurveyService surveyService;
     private final RegisterFormConverter formConverter;
     private final UserService userService;
 
