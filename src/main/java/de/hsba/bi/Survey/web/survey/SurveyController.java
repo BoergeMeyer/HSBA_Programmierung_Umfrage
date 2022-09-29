@@ -24,10 +24,19 @@ public class SurveyController {
     private final SurveyFormConverter   formConverter;
     private final ResultService         resultService;
 
+    @ModelAttribute("user")
+    public String getUsername(){
+        return userService.getUserDetails();
+    }
+
     @GetMapping
     public String index(Model model) {
         model.addAttribute("surveyAll",surveyService.findAllSurveyNotLocked());
         model.addAttribute("surveyAllWithoutFromUser",surveyService.findAllSurveyNotFromUser(userService.getUserDetails()));
+        model.addAttribute("HasVoted",resultService);
+        surveyService.findAllSurvey().forEach(
+                survey -> System.out.println(resultService.getVoteForSurveyAndUser(getUsername(),survey.getId()))
+        );
         return "surveys/index";
     }
 
