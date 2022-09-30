@@ -15,20 +15,22 @@
     <br><br><br>
     <div>
         <form method="post" th:action="@{/vote}">
-            <div th:each="survey : ${getSelectedSurvey}">
+            <div th:each="survey : ${getSelectedSurvey}" class="ShowSurvey">
                 <h3 th:text="${survey.title}"></h3>
                     <div  th:each ="questions : ${getQuestions}">
                         <p  th:text="${questions.title}"></p>
                             <ul th:each ="answers : ${questions.getAnswers()}">
-                                <lable>
-                                    <li>
-                                        <input type="radio" name="answer" th:value="${answers.id}" required><span th:text="${answers.title}"></span>
-                                    </li>
-                                </lable>
+                                <li>
+                                    <input type="radio" name="answer" th:value="${answers.id}" required><span th:text="${answers.title}"></span>
+                                </li>
                             </ul>
                     </div>
+                <div class="selection">
+                    <ul>
+                        <li><button type="submit" name="index" value="1">Nächste Frage</button></li>
+                    </ul>
+                </div>
             </div>
-            <button type="submit" name="index" value="1">Nächste Frage</button>
         </form>
     </div>
 </div>

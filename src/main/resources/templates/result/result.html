@@ -14,7 +14,7 @@
 <div class="content">
   <div>
     <!-- UMFRAGE ÜBERSICHT -->
-    <div th:each="survey : ${getSurveyById}" class="ShowSurvey">
+    <div th:each="survey : ${getSurveyResult}" class="ShowSurvey">
       <div>
         <h3 th:text="${survey.title}"></h3>
         <p>Beschreibung: <span th:text="${survey.description}"></span></p>
@@ -28,9 +28,8 @@
         <!-- Antworten -->
         <ul>
           <li th:each ="answers : ${questions.getAnswers()}">
-            <ul>
-              <li><span th:text="${answers.title}"></span><span> | </span><span th:text="${result.calculateResult(questions.id,answers.id)}"></span></li>
-            </ul>
+            <span th:text="${answers.title}"></span>
+            <span th:text="${result.calculateResult(questions.id,answers.id)}"></span>
           </li>
         </ul>
       </div>

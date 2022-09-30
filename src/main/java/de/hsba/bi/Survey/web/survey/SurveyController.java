@@ -98,6 +98,7 @@ public class SurveyController {
     //Title einer Umfrage, Frage oder Antwort wird geändert
     @GetMapping("change")
     public String edit(@RequestParam Long id,@RequestParam String change ,Model model){
+        System.out.println(change);
         switch(change){
             case"Survey":
                 model.addAttribute("objectId",id);
@@ -120,6 +121,9 @@ public class SurveyController {
 
     @GetMapping("changeSurvey")
     public String changeSurvey(@RequestParam Long id, @RequestParam String objectTitle){
+        System.out.println(id + " " + objectTitle);
+        String title = objectTitle;
+        surveyService.getSurvey(id).setTitle(title);
         surveyService.getSurvey(id).setTitle(objectTitle);return "redirect:" + "edit?sid=" + id;
     }
 

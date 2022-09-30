@@ -31,7 +31,7 @@ public class ResultService {
         System.out.println(countAID + " " + countQID);
         Double calc = (Double.valueOf(countAID) / Double.valueOf(countQID))*100;
         System.out.println(calc);
-        return " - Ergebnis: "+ String.format("%.2f", calc) + "%";
+        return "("+ String.format("%.2f", calc) + "%)";
     }
 
 }

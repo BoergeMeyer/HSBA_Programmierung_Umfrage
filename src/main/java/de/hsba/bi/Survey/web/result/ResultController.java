@@ -72,7 +72,7 @@ public class ResultController {
         return "index";
     }
 
-    @GetMapping("/result/{sid}")
+    @GetMapping(path = "/result/{sid}")
     public String getResults(Model model, @PathVariable("sid") Long sid){
         model.addAttribute("getSurveyResult", surveyService.findSurveyById(sid));
         model.addAttribute("result",resultService);
