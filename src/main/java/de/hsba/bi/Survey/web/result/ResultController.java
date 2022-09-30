@@ -47,6 +47,7 @@ public class ResultController {
             List<Survey> survey = surveyService.findSurveyByAnswerId(aid);
             Long sid = surveyService.findSurveyByAnswerId(aid).get(0).getId();
             Long qid = surveyService.findQuestionByAnswerId(aid).get(0).getId();
+
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             User user = principal instanceof UserDetails ? userService.returnUserByName(((UserDetails) principal).getUsername()) : null;
 
@@ -65,19 +66,18 @@ public class ResultController {
             if(currentIndex <= numberOfQuestions){
                 model.addAttribute("getQuestions",survey.get(0).getQuestions().get(currentIndex));
             }
-            return (currentIndex <= numberOfQuestions) ? "result/voting" : "index";
+            return (currentIndex <= numberOfQuestions) ? "result/voting" : "result/return";
         }
-
+        System.out.println("Index");
         return "index";
     }
-    /*
-        - Surveys werden alle angezeigt (Button "Auswählen" wird angezeigt, wenn man eingeloggt ist)
-        - Struktur:
-            - Oben = Titel, Beschreibung
-            - Unten = Fragen und Antworten
-        - Vorgehen = Wenn man auf "nächste Frage" klickt, dann wird die nächste angezeigt
-        - Bei "Nächste Frage" wird die gewählte Antwort gespeichert
-        - Wenn man eingeloggt ist, dann kann man sich die gesamtauswertung anschauen
-     */
+
+    @GetMapping(path = "/result/{sid}")
+    public String getResults(Model model, @PathVariable("sid") Long sid){
+        model.addAttribute("getSurveyResult", surveyService.findSurveyById(sid));
+        model.addAttribute("result",resultService);
+        return "result/result";
+    }
+
 }
 

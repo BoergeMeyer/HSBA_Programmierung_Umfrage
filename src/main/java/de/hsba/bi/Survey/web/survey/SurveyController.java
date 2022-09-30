@@ -19,23 +19,23 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class SurveyController {
 
-    private final SurveyService surveyService;
-    private final UserService userService;
-    private final SurveyFormConverter formConverter;
-    private final ResultService resultService;
+    private final SurveyService         surveyService;
+    private final UserService           userService;
+    private final SurveyFormConverter   formConverter;
+    private final ResultService         resultService;
+
+    @ModelAttribute("user")
+    public String getUsername(){
+        return userService.getUserDetails();
+    }
 
     @GetMapping
     public String index(Model model) {
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String name = principal instanceof UserDetails ? ((UserDetails) principal).getUsername() : null;
-        if(name == null) {
-            model.addAttribute("surveyAll",surveyService.findAllSurveyNotLocked());
-        }else{
-            model.addAttribute("surveyAllWithoutFromUser",surveyService.findAllSurveyNotFromUser(name));
-        }
-        surveyService.findAllSurveyNotLocked().forEach(
-                survey -> System.out.println(survey.getIs_locked())
+        model.addAttribute("surveyAll",surveyService.findAllSurveyNotLocked());
+        model.addAttribute("surveyAllWithoutFromUser",surveyService.findAllSurveyNotFromUser(userService.getUserDetails()));
+        model.addAttribute("HasVoted",resultService);
+        surveyService.findAllSurvey().forEach(
+                survey -> System.out.println(resultService.getVoteForSurveyAndUser(getUsername(),survey.getId()))
         );
         return "surveys/index";
     }
@@ -43,9 +43,7 @@ public class SurveyController {
     // Eigene Umfragen auflisten
     @GetMapping(path = "my")
     public String getMySurvey(@ModelAttribute("question") CreateQuestionForm form, Model model){
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String name = principal instanceof UserDetails ? ((UserDetails) principal).getUsername() : null;
-        model.addAttribute("getSurveyById", surveyService.findSurveyByUsername(name));
+        model.addAttribute("getSurveyById", surveyService.findSurveyByUsername(userService.getUserDetails()));
         model.addAttribute("result",resultService);
         return "surveys/my";
     }
@@ -57,7 +55,6 @@ public class SurveyController {
         User user = principal instanceof UserDetails ? userService.returnUserByName(((UserDetails) principal).getUsername()) : null;
         Survey survey = formConverter.create(new Survey(), form, user);
         surveyService.saveSurvey(survey);
-        surveyService.findAllSurvey().forEach(surveys -> System.out.println(surveys.getTitle()));
         return "redirect:" + "my";
     }
 
@@ -90,7 +87,6 @@ public class SurveyController {
     @GetMapping("edit")
     public String edit(@RequestParam Long sid, Model model){
         User currentUser = userService.findCurrentUser();
-        //System.out.println(currentUser.getName());
         if(currentUser.getName() != null){
             model.addAttribute("getSurveyByIdAndUser", surveyService.findSurveyByIdAndUsername(currentUser.getName(),sid));
         }else{
@@ -102,6 +98,7 @@ public class SurveyController {
     //Title einer Umfrage, Frage oder Antwort wird geändert
     @GetMapping("change")
     public String edit(@RequestParam Long id,@RequestParam String change ,Model model){
+        System.out.println(change);
         switch(change){
             case"Survey":
                 model.addAttribute("objectId",id);
@@ -124,28 +121,24 @@ public class SurveyController {
 
     @GetMapping("changeSurvey")
     public String changeSurvey(@RequestParam Long id, @RequestParam String objectTitle){
-        System.out.println(surveyService.getSurvey(id).getTitle());
-        surveyService.getSurvey(id).setTitle(objectTitle);
-        System.out.println(surveyService.getSurvey(id).getTitle());
-        return "redirect:" + "edit?sid=" + Long.toString(id);
+        System.out.println(id + " " + objectTitle);
+        String title = objectTitle;
+        surveyService.getSurvey(id).setTitle(title);
+        surveyService.getSurvey(id).setTitle(objectTitle);return "redirect:" + "edit?sid=" + id;
     }
 
     @GetMapping("changeQuestion")
     public String changeQuestion(@RequestParam Long id, @RequestParam String objectTitle){
-        System.out.println("Frage wird bearbeitet.");
         surveyService.getQuestion(id).setTitle(objectTitle);
         Long sid = surveyService.getQuestion(id).getSurvey().getId();
-        System.out.println("Frage wurde bearbeitet.");
-        return "redirect:" + "edit?sid=" + Long.toString(sid);
+        return "redirect:" + "edit?sid=" + sid;
     }
 
     @GetMapping("changeAnswer")
     public String changeAnswer(@RequestParam Long id, @RequestParam String objectTitle){
-        System.out.println("Antwort wird bearbeitet.");
         surveyService.getAnswer(id).setTitle(objectTitle);
         Long sid = surveyService.getAnswer(id).getQuestion().getSurvey().getId();
-        System.out.println("Antwort wurde bearbeitet.");
-        return "redirect:" + "edit?sid=" + Long.toString(sid);
+        return "redirect:" + "edit?sid=" + sid;
     }
 
     //Umfrage, Frage oder Antwort wird gelöscht
@@ -164,8 +157,7 @@ public class SurveyController {
                     break;
             }
         }
-        System.out.println(type);
-        return (type == "survey") ? ":redirect" + "my" : "redirect:" + "edit?sid=" + Long.toString(sid);
+        return (type == "survey") ? ":redirect" + "my" : "redirect:" + "edit?sid=" + sid;
     }
 
     @GetMapping("is_locked")
