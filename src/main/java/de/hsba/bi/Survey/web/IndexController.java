@@ -39,4 +39,9 @@ public class IndexController {
         }
         return auth instanceof AnonymousAuthenticationToken ? "login" : "redirect:/";
     }
+
+    @GetMapping("404")
+    public String error(){
+        return "error/404";
+    }
 }
