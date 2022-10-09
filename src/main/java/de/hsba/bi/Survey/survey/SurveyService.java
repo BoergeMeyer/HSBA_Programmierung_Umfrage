@@ -57,9 +57,6 @@ public class SurveyService {
         questionRepository.deleteById(id);
     }
 
-    //https://stackoverflow.com/questions/18852059/java-list-containsobject-with-field-value-equal-to-x
-    //https://www.geeksforgeeks.org/arraylist-foreach-method-in-java/
-
     //methods for answer
 
     public List<Answer> findAllAnswers(){
@@ -80,10 +77,6 @@ public class SurveyService {
 
     public String returnNumberOfSurveys(){
         return Integer.toString(surveyRepository.findAll().size());
-    }
-
-    public List<Survey>findSurveyByUserId(Long id){
-        return surveyRepository.findSurveyByUserId(id);
     }
 
     public List<Survey>findSurveyByUsername(String username){
