@@ -20,7 +20,10 @@
             <hr>
             <div th:if="${survey.description != null}">Beschreibung: <span th:text="${survey.description}"></span></div>
             <div class="selection">
-                <ul><li><a th:href="@{../voting/{sid}(sid = ${survey.id})}">Abstimmen</a></li><li><a href="">Auswertung</a></li></ul>
+                <ul>
+                    <li><a th:if="${HasVoted.getVoteForSurveyAndUser(user,survey.id) == null}" th:href="@{../voting/{sid}(sid = ${survey.id})}">Abstimmen</a></li>
+                    <li><a th:if="${HasVoted.getVoteForSurveyAndUser(user,survey.id) == 1}" th:href="@{../result/{sid}(sid = ${survey.id})}">Auswertung</a></li>
+                </ul>
             </div>
         </div>
 
@@ -29,9 +32,12 @@
             <hr>
             <div th:if="${survey.description != null}">Beschreibung: <span th:text="${survey.description}"></span></div>
             <div class="selection">
-                <ul><li><a th:href="@{../voting/{sid}(sid = ${survey.id})}">Abstimmen</a></li><li><a href="">Auswertung</a></li></ul>
+                <ul>
+                    <li><a th:href="@{../voting/{sid}(sid = ${survey.id})}">Vorschau</a></li>
+                </ul>
             </div>
         </div>
+
     </div>
 </div>
 <div th:replace="layout/footer :: footer"></div>

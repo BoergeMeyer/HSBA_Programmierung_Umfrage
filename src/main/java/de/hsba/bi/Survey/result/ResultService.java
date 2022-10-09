@@ -21,13 +21,8 @@ public class ResultService {
         return resultRepository.findAll();
     }
 
-    public String returnResult(Long qid, Long aid){
-
-        int sum = resultRepository.findAllResultByQuestionID(qid).size();
-        int count = resultRepository.findAllResultByAnswerID(aid).size();
-        System.out.println("SID: " + qid + " - AID: " + aid + " - SUM: " + sum + "- COUNT:" + count);
-
-        return count/sum + "%";
+    public Integer getVoteForSurveyAndUser(String username, Long surveyID){
+        return resultRepository.getVoteForSurveyAndUser(username, surveyID);
     }
 
     public String calculateResult(Long qid, Long aid){
@@ -36,7 +31,7 @@ public class ResultService {
         System.out.println(countAID + " " + countQID);
         Double calc = (Double.valueOf(countAID) / Double.valueOf(countQID))*100;
         System.out.println(calc);
-        return " - Ergebnis: "+ String.format("%.2f", calc) + "%";
+        return "("+ String.format("%.2f", calc) + "%)";
     }
 
 }

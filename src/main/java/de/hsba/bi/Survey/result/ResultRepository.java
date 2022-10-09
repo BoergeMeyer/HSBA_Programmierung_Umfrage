@@ -17,7 +17,7 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
     @Query("SELECT r FROM Result r WHERE r.selectedAnswerID = :id")
     List<Result> findAllResultByAnswerID(@RequestParam("id") Long id);
 
-   @Query("SELECT COUNT(r.selectedAnswerID) AS COUNT_AID FROM Result r WHERE r.selectedAnswerID = :aid")
+    @Query("SELECT COUNT(r.selectedAnswerID) AS COUNT_AID FROM Result r WHERE r.selectedAnswerID = :aid")
     Integer countAnswerID(@RequestParam("aid") Long aid);
 
     @Query("SELECT COUNT(r.questionID) AS COUNT_QID FROM Result r WHERE r.questionID = :qid ")
@@ -25,4 +25,7 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
 
     @Query("SELECT DISTINCT r.user, r.surveyID FROM Result r")
     Integer countResult();
+
+    @Query("SELECT 1 FROM Result r WHERE r.user.name = :username AND r.surveyID = :surveyID")
+    Integer getVoteForSurveyAndUser(@RequestParam("username") String username, @RequestParam("surveyID") Long surveyID);
 }

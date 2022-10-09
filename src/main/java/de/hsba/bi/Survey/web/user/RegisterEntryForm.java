@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RegisterEntryForm {
-    //notNULL and notEMPTY is missing
 
     private String username;
 
