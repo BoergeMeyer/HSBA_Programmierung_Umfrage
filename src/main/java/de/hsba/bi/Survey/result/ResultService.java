@@ -28,9 +28,7 @@ public class ResultService {
     public String calculateResult(Long qid, Long aid){
         int countQID = resultRepository.countQuestionID(qid);
         int countAID = resultRepository.countAnswerID(aid);
-        System.out.println(countAID + " " + countQID);
         Double calc = (Double.valueOf(countAID) / Double.valueOf(countQID))*100;
-        System.out.println(calc);
         return "("+ String.format("%.2f", calc) + "%)";
     }
 
