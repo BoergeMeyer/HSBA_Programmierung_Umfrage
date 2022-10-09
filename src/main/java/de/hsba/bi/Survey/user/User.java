@@ -13,25 +13,6 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 public class User {
-    public static String ADMIN_ROLE = "ADMIN";
-    public static String MEMBER_ROLE = "MEMBER";
-
-    public static String getCurrentUsername() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            return ((UserDetails) principal).getUsername();
-        }
-        return null;
-    }
-
-    public static Long getCurrentUserId(){
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(principal instanceof User){
-            return ((User) principal).getId();
-        }
-        return null;
-    }
-
 
     @Id
     @Getter
@@ -61,5 +42,13 @@ public class User {
     public User(User user){
         name = user.getName();
         password = user.getPassword();
+    }
+
+    public static String getCurrentUsername() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            return ((UserDetails) principal).getUsername();
+        }
+        return null;
     }
 }
