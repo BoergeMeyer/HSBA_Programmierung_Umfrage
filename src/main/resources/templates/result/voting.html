@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html lang="en"
       layout:decorate="~{layout}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -12,8 +12,9 @@
 <body>
 <div th:replace="layout/menu :: menu"></div>
 <div class="content" >
-    <br><br><br>
-    <div>
+
+    <!-- Abstimmung wird sichtbar, wenn der Benutzer eingeloggt ist -->
+    <div sec:authorize="authenticated" >
         <form method="post" th:action="@{/vote}">
             <div th:each="survey : ${getSelectedSurvey}" class="ShowSurvey">
                 <h3 th:text="${survey.title}"></h3>
@@ -33,6 +34,33 @@
             </div>
         </form>
     </div>
+
+    <!-- Vollständige Umfrage wird angezeigt, wenn keiner eingeloggt ist -->
+    <div sec:authorize="anonymous" >
+        <!-- UMFRAGE ÜBERSICHT -->
+        <div th:each="survey : ${getSurveyById}" class="ShowSurvey">
+            <div>
+                <h3 th:text="${survey.title}"></h3>
+                <p>Beschreibung: <span th:text="${survey.description}"></span></p>
+            </div>
+            <!-- Fragen -->
+            <div th:each ="questions : ${survey.getQuestions()}">
+                <hr>
+                <ul class="edit">
+                    <li><p th:text="${questions.title}"></p></li>
+                </ul>
+                <!-- Antworten -->
+                <ul>
+                    <li th:each ="answers : ${questions.getAnswers()}">
+                        <span th:text="${answers.title}"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
 <div th:replace="layout/footer :: footer"></div>
 </body>

@@ -35,6 +35,7 @@ public class ResultController {
         surveyService.findSurveyById(sid).get(0).getQuestions();
         model.addAttribute("getSelectedSurvey", surveyService.findSurveyById(sid));
         model.addAttribute("getQuestions",surveyService.findSurveyById(sid).get(0).getQuestions().get(0));
+        model.addAttribute("getSurveyById", surveyService.findSurveyById(sid));
         System.out.println("Question index: " +
         surveyService.findSurveyById(sid).get(0).getQuestions().indexOf(surveyService.findSurveyById(sid).get(0).getQuestions().get(0))
         );
