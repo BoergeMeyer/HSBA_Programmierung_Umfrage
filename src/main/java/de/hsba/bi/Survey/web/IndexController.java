@@ -26,7 +26,7 @@ public class IndexController {
     public String index(Model model) {
         model.addAttribute("countSurvey",surveyService.returnNumberOfSurveys());
         model.addAttribute("countUsers",userService.returnNumberOfUsers());
-        //model.addAttribute("countResult",resultService.returnNumberOfResult());
+        model.addAttribute("numberResults",resultService.getNumberOfResults());
         return "index";
     }
 

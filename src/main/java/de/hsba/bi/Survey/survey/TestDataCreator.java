@@ -1,5 +1,6 @@
 package de.hsba.bi.Survey.survey;
 
+import de.hsba.bi.Survey.result.Result;
 import de.hsba.bi.Survey.user.User;
 import de.hsba.bi.Survey.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -406,9 +407,8 @@ public class TestDataCreator {
         fSQ3.addAnswer(fSA6);
         fSQ4.addAnswer(fSA7);
         fSQ4.addAnswer(fSA8);
+
     }
-
-
 
     private User createUser(String name, String password) {
         return userService.save(new User(name, passwordEncoder.encode(password)));

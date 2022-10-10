@@ -121,7 +121,6 @@ public class SurveyController {
 
     @GetMapping("changeSurvey")
     public String changeSurvey(@RequestParam Long id, @RequestParam String objectTitle){
-        System.out.println(id + " " + objectTitle);
         String title = objectTitle;
         surveyService.getSurvey(id).setTitle(title);
         surveyService.getSurvey(id).setTitle(objectTitle);return "redirect:" + "edit?sid=" + id;

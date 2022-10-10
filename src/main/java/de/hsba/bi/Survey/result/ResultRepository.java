@@ -14,4 +14,7 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
 
     @Query("SELECT 1 FROM Result r WHERE r.user.name = :username AND r.surveyID = :surveyID")
     Integer getVoteForSurveyAndUser(@RequestParam("username") String username, @RequestParam("surveyID") Long surveyID);
+
+    @Query("SELECT COUNT(r.id) FROM Result r GROUP BY r.user, r.surveyID, r.id")
+    Integer getNumberOfResults();
 }
