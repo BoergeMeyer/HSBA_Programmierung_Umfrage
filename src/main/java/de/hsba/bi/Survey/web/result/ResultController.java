@@ -31,14 +31,10 @@ public class ResultController {
 
     @GetMapping(path = "/voting/{sid}")
     public String Startvote(Model model, @PathVariable("sid") Long sid) {
-        System.out.println(sid);
         surveyService.findSurveyById(sid).get(0).getQuestions();
         model.addAttribute("getSelectedSurvey", surveyService.findSurveyById(sid));
         model.addAttribute("getQuestions",surveyService.findSurveyById(sid).get(0).getQuestions().get(0));
         model.addAttribute("getSurveyById", surveyService.findSurveyById(sid));
-        System.out.println("Question index: " +
-        surveyService.findSurveyById(sid).get(0).getQuestions().indexOf(surveyService.findSurveyById(sid).get(0).getQuestions().get(0))
-        );
         return "result/voting";
     }
 
@@ -54,10 +50,6 @@ public class ResultController {
 
             Result result = new Result(sid,qid,aid,user);
             resultService.save(result);
-            System.out.println("Aktuelle Results:");
-            resultService.findAll().forEach(
-                    res -> System.out.println(res.getSurveyID() + " " + res.getQuestionID() + " " + res.getSelectedAnswerID() + " " + res.getUser().getName())
-            );
             int numberOfQuestions = survey.get(0).getQuestions().size() - 1;
             int currentIndex =  survey.get(0).getQuestions().indexOf(
                                     surveyService.findQuestionByAnswerId(aid).get(0)
