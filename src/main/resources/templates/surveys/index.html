@@ -6,7 +6,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Umfragen</title>
+    <title>Übersicht</title>
     <link rel="stylesheet" th:href="@{/style.css}" type="text/css">
 </head>
 <body>
@@ -18,9 +18,10 @@
         <div sec:authorize="authenticated" th:each="survey : ${surveyAllWithoutFromUser}" class="selectSurvey">
             <h3 th:text="${survey.title}"></h3>
             <hr>
-            <div th:if="${survey.description != null}">Beschreibung: <span th:text="${survey.description}"></span></div>
+            <div th:if="${survey.description != null}"><span th:text="${survey.description}"></span></div>
             <div class="selection">
                 <ul>
+                    <li><a th:href="@{../preview/{sid}(sid = ${survey.id})}">Vorschau</a></li>
                     <li><a th:if="${HasVoted.getVoteForSurveyAndUser(user,survey.id) == null}" th:href="@{../voting/{sid}(sid = ${survey.id})}">Abstimmen</a></li>
                     <li><a th:if="${HasVoted.getVoteForSurveyAndUser(user,survey.id) == 1}" th:href="@{../result/{sid}(sid = ${survey.id})}">Auswertung</a></li>
                 </ul>
@@ -33,7 +34,7 @@
             <div th:if="${survey.description != null}">Beschreibung: <span th:text="${survey.description}"></span></div>
             <div class="selection">
                 <ul>
-                    <li><a th:href="@{../voting/{sid}(sid = ${survey.id})}">Vorschau</a></li>
+                    <li><a th:href="@{../preview/{sid}(sid = ${survey.id})}">Vorschau</a></li>
                 </ul>
             </div>
         </div>

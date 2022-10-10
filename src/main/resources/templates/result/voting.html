@@ -6,7 +6,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Umfrage XYZ</title>
+    <title>Abstimmung</title>
     <link rel="stylesheet" th:href="@{/style.css}" type="text/css">
 </head>
 <body>
@@ -14,13 +14,13 @@
 <div class="content" >
 
     <!-- Abstimmung wird sichtbar, wenn der Benutzer eingeloggt ist -->
-    <div sec:authorize="authenticated" >
+    <div sec:authorize="authenticated">
         <form method="post" th:action="@{/vote}">
             <div th:each="survey : ${getSelectedSurvey}" class="ShowSurvey">
                 <h3 th:text="${survey.title}"></h3>
                     <div  th:each ="questions : ${getQuestions}">
                         <p  th:text="${questions.title}"></p>
-                            <ul th:each ="answers : ${questions.getAnswers()}">
+                            <ul style="list-style-type: none" th:each ="answers : ${questions.getAnswers()}">
                                 <li>
                                     <input type="radio" name="answer" th:value="${answers.id}" required><span th:text="${answers.title}"></span>
                                 </li>
@@ -36,7 +36,7 @@
     </div>
 
     <!-- Vollständige Umfrage wird angezeigt, wenn keiner eingeloggt ist -->
-    <div sec:authorize="anonymous" >
+    <div sec:authorize="anonymous">
         <!-- UMFRAGE ÜBERSICHT -->
         <div th:each="survey : ${getSurveyById}" class="ShowSurvey">
             <div>

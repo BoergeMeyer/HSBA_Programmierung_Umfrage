@@ -25,6 +25,10 @@ public class ResultService {
         return resultRepository.getVoteForSurveyAndUser(username, surveyID);
     }
 
+    public Integer getNumberOfResults(){
+        return resultRepository.getNumberOfResults();
+    }
+
     public String calculateResult(Long qid, Long aid){
         int countQID = resultRepository.countQuestionID(qid);
         int countAID = resultRepository.countAnswerID(aid);

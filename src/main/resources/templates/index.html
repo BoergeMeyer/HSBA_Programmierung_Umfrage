@@ -22,21 +22,24 @@
 
     <!-- REGISTRIERUNG -->
     <div class="banner">
-        <a href="/users/registration">JETZT KOSTENLOS REGISTRIEREN!</a>
+        <a>JETZT KOSTENLOS REGISTRIEREN!</a>
     </div>
 
     <!-- WERBUNG -->
     <div class="advertisement">
         <div>
-            <p th:text="${countUsers}"></p>
+            <p th:if="${countUsers != null}" th:text="${countUsers}"></p>
+            <p th:if="${countUsers == null}">0</p>
             <h3>Benutzer</h3>
         </div>
         <div>
-            <p th:text="${countSurvey}"></p>
+            <p th:if="${countSurvey != null}" th:text="${countSurvey}"></p>
+            <p th:if="${countSurvey == null}">0</p>
             <h3>Umfragen</h3>
         </div>
         <div>
-            <p>0</p>
+            <p th:if="${numberResults != null}" th:text="${numberResults}"></p>
+            <p th:if="${numberResults == null}">0</p>
             <h3>Ergebnisse</h3>
         </div>
     </div>

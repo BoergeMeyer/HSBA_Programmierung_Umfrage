@@ -29,14 +29,12 @@ public class SurveyController {
         return userService.getUserDetails();
     }
 
+    //Umfragenübersicht
     @GetMapping
     public String index(Model model) {
         model.addAttribute("surveyAll",surveyService.findAllSurveyNotLocked());
         model.addAttribute("surveyAllWithoutFromUser",surveyService.findAllSurveyNotFromUser(userService.getUserDetails()));
         model.addAttribute("HasVoted",resultService);
-        surveyService.findAllSurvey().forEach(
-                survey -> System.out.println(resultService.getVoteForSurveyAndUser(getUsername(),survey.getId()))
-        );
         return "surveys/index";
     }
 
@@ -58,6 +56,7 @@ public class SurveyController {
         return "redirect:" + "my";
     }
 
+    //Frage oder Antwort zu einer Umfrage hinzufügen
     @GetMapping("add")
     public String addToSurvey(@RequestParam Long sid, @RequestParam String actioname, @RequestParam String title){
         if(actioname != null){
@@ -98,7 +97,6 @@ public class SurveyController {
     //Title einer Umfrage, Frage oder Antwort wird geändert
     @GetMapping("change")
     public String edit(@RequestParam Long id,@RequestParam String change ,Model model){
-        System.out.println(change);
         switch(change){
             case"Survey":
                 model.addAttribute("objectId",id);
@@ -119,14 +117,15 @@ public class SurveyController {
         return "surveys/change";
     }
 
+    //Titel einer Umfrage wird geändert
     @GetMapping("changeSurvey")
     public String changeSurvey(@RequestParam Long id, @RequestParam String objectTitle){
-        System.out.println(id + " " + objectTitle);
         String title = objectTitle;
         surveyService.getSurvey(id).setTitle(title);
         surveyService.getSurvey(id).setTitle(objectTitle);return "redirect:" + "edit?sid=" + id;
     }
 
+    //Titel einer Frage wird geändert
     @GetMapping("changeQuestion")
     public String changeQuestion(@RequestParam Long id, @RequestParam String objectTitle){
         surveyService.getQuestion(id).setTitle(objectTitle);
@@ -134,6 +133,7 @@ public class SurveyController {
         return "redirect:" + "edit?sid=" + sid;
     }
 
+    //Titel einer Antwort wird geändert
     @GetMapping("changeAnswer")
     public String changeAnswer(@RequestParam Long id, @RequestParam String objectTitle){
         surveyService.getAnswer(id).setTitle(objectTitle);
@@ -160,6 +160,7 @@ public class SurveyController {
         return (type == "survey") ? ":redirect" + "my" : "redirect:" + "edit?sid=" + sid;
     }
 
+    //Sperrstatus einer Umfrage wird geändert
     @GetMapping("is_locked")
     public String changeIsLocked(@RequestParam Long sid,@RequestParam int status){
         surveyService.getSurvey(sid).setIs_locked(status);
