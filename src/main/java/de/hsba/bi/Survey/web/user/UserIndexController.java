@@ -17,12 +17,14 @@ public class UserIndexController {
     private final RegisterFormConverter formConverter;
     private final UserService userService;
 
+    //Rückgabe der Registrierungsseite
     @GetMapping("registration")
     public String Form(Model model){
         model.addAttribute("user", new User());
         return "user/register";
     }
 
+    //Registrierung
     @PostMapping("registerUser")
     public String createUser(@ModelAttribute("user") RegisterEntryForm form, Model model, @RequestParam("password") String password, @RequestParam("passwordrepeat") String passwordRep){
         System.out.println("register Posting started " + password + " " + passwordRep);
@@ -46,6 +48,7 @@ public class UserIndexController {
         }
     }
 
+    //Userliste
     @GetMapping("list")
     public String list(Model model){
         model.addAttribute("Alluser", userService.findAll());
