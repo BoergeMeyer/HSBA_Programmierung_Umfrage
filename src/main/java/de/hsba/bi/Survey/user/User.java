@@ -20,18 +20,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Getter
-    @Setter
     @Basic(optional = false)
     private String name;
 
-    @Getter
-    @Setter
     @Basic(optional = false)
     private String password;
 
-    @Getter
-    @Setter
     private String role;
 
     public User(String name, String password) {
