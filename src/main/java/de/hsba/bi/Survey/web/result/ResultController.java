@@ -29,8 +29,9 @@ public class ResultController {
     private final ResultService resultService;
 
 
+    //Abstimmung der Umfrage
     @GetMapping(path = "/voting/{sid}")
-    public String Startvote(Model model, @PathVariable("sid") Long sid) {
+    public String startVote(Model model, @PathVariable("sid") Long sid) {
         surveyService.findSurveyById(sid).get(0).getQuestions();
         model.addAttribute("getSelectedSurvey", surveyService.findSurveyById(sid));
         model.addAttribute("getQuestions",surveyService.findSurveyById(sid).get(0).getQuestions().get(0));
@@ -38,6 +39,15 @@ public class ResultController {
         return "result/voting";
     }
 
+    //Vorschau der Umfrage
+    @GetMapping(path = "/preview/{sid}")
+    public String preview(Model model, @PathVariable("sid") Long sid){
+        surveyService.findSurveyById(sid).get(0).getQuestions();
+        model.addAttribute("getSurveyById", surveyService.findSurveyById(sid));
+        return "result/preview";
+    }
+
+    //Fortführung der Umfrage: Weiterleitung zur nächsten Frage
     @PostMapping("vote")
     public String continueVote(Model model, @RequestParam("answer") Long aid, @RequestParam("index") Long i){
         if(i != 0){
@@ -61,10 +71,10 @@ public class ResultController {
             }
             return (currentIndex <= numberOfQuestions) ? "result/voting" : "result/return";
         }
-        System.out.println("Index");
         return "index";
     }
 
+    //Umfrageergbnis anzeigen
     @GetMapping(path = "/result/{sid}")
     public String getResults(Model model, @PathVariable("sid") Long sid){
         model.addAttribute("getSurveyResult", surveyService.findSurveyById(sid));
