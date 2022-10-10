@@ -6,15 +6,15 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Ergebnis</title>
+  <title>Vorschau</title>
   <link rel="stylesheet" th:href="@{/style.css}" type="text/css">
 </head>
 <body>
 <div th:replace="layout/menu :: menu"></div>
-<div class="content">
+<div class="content" >
   <div>
     <!-- UMFRAGE ÜBERSICHT -->
-    <div th:each="survey : ${getSurveyResult}" class="ShowSurvey">
+    <div th:each="survey : ${getSurveyById}" class="ShowSurvey">
       <div>
         <h3 th:text="${survey.title}"></h3>
         <p>Beschreibung: <span th:text="${survey.description}"></span></p>
@@ -29,7 +29,6 @@
         <ul>
           <li th:each ="answers : ${questions.getAnswers()}">
             <span th:text="${answers.title}"></span>
-            <span th:text="${result.calculateResult(questions.id,answers.id)}"></span>
           </li>
         </ul>
       </div>
